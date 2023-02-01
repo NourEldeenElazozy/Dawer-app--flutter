@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "499794031439",
+    "project_id": "project-dmi",
+    "storage_bucket": "project-dmi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499794031439:android:3b40ba64005d03ec3bcb3a",
+        "android_client_info": {
+          "package_name": "com.dawer.dawerf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499794031439-5q3hsbt1mu0724q69km0lmikh9j06ibh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyQ_GDe7RDqeCejWWTPRpoSFkAO-NGNsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499794031439-5q3hsbt1mu0724q69km0lmikh9j06ibh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
