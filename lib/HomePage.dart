@@ -1,4 +1,7 @@
 import 'package:dawerf/HomeScreen/dawer_home.dart';
+import 'package:dawerf/Notification/notification_screen.dart';
+import 'package:dawerf/Profile/Profile.dart';
+import 'package:dawerf/Utiils/User.dart';
 
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
@@ -24,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     items='';
+
     return Directionality(
 
 
@@ -51,13 +55,13 @@ class _HomePageState extends State<HomePage> {
                 navigatorkey: _tab2navigatorKey,
               ),
               PersistentTabItem(
-                tab: DawerHome(),
+                tab: NotificationScreen(),
                 icon: Icons.notifications,
                 title: 'الإشعارات',
                 navigatorkey: _tab3navigatorKey,
               ),
               PersistentTabItem(
-                tab: DawerHome(),
+                tab: Profile(),
                 icon: Icons.person,
                 title: 'الملف الشخصي',
                 navigatorkey: _tab4navigatorKey,

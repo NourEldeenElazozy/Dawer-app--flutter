@@ -21,4 +21,7 @@ class ColorResources{
   static const Color greyD4D = Color(0xffD4D4DB);
   static const Color redF21 = Color(0xffF21D52);
   static const Color redF22 = Color(0xfff21d2f);
+
+  static const Color custom = Color(0xff303972);
+  static const Color yellow = Color(0xffffa500);
 }

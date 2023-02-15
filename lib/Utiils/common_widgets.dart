@@ -73,6 +73,7 @@ commonButton(onTap, text,buttonColor,textColor) => InkWell(
   ),
 );
 
+
 textField1(hintText,controller,keyBoardType) => TextFormField(
 
   cursorColor: ColorResources.black,

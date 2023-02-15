@@ -60,6 +60,10 @@ dev_dependencies:
   firebase_core_dart: ^1.0.1
   firebase_storage: ^11.0.10
   path: ^1.8.2
+  google_maps_flutter: ^2.2.3
+  geolocator: ^9.0.2
+  quickalert: ^1.0.1
+  timeago: ^3.3.0
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

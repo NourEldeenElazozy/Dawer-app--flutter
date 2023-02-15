@@ -1,5 +1,6 @@
 
 
+import 'package:dawerf/AuthScreens/WelcomeScreen.dart';
 import 'package:dawerf/HomePage.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 
@@ -46,7 +47,7 @@ class DoctorApp extends StatelessWidget {
         buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
         fontFamily: TextFontFamily.AVENIR_LT_PRO_BOOK,
       ),
-      home: LoginScreen(),
+      home: WelcomeScreen(),
     );
   }
 }

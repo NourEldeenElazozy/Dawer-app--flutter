@@ -8,12 +8,12 @@ import 'package:dawerf/Utiils/User.dart';
 
 import 'package:get/get.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginCompanyScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginCompanyScreenState createState() => _LoginCompanyScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
   late String test;
   logInmethod(phone, pass) async {
     await FirebaseFirestore.instance
