@@ -1,3 +1,4 @@
+import 'package:dawerf/Companys/HomePageCompany.dart';
 import 'package:dawerf/HomePage.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Utiils/colors.dart';
@@ -17,7 +18,7 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
   late String test;
   logInmethod(phone, pass) async {
     await FirebaseFirestore.instance
-        .collection('users')
+        .collection('companies')
         .where("phone", isEqualTo: phone.toString())
         .where("password", isEqualTo: pass.toString())
         .get()
@@ -167,7 +168,7 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else if (test == 'yes data') {
-                                   Get.off(HomePage());
+                                   Get.offAll(HomePageCompany());
                                 }
 
                                 /*

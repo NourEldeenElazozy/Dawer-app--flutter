@@ -1,3 +1,5 @@
+import 'package:dawerf/Companys/Company_Reports.dart';
+import 'package:dawerf/Companys/Tasks.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Notification/notification_screen.dart';
 import 'package:dawerf/Profile/Profile.dart';
@@ -10,12 +12,12 @@ import 'package:dawerf/report.dart';
 import 'package:flutter/material.dart';
 
 
-class HomePage extends StatefulWidget {
+class HomePageCompany extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageCompany> createState() => _HomePageCompanyState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageCompanyState extends State<HomePageCompany> {
   final _tab1navigatorKey = GlobalKey<NavigatorState>();
 
   final _tab2navigatorKey = GlobalKey<NavigatorState>();
@@ -44,18 +46,23 @@ class _HomePageState extends State<HomePage> {
                 navigatorkey: _tab1navigatorKey,
               ),
               PersistentTabItem(
-                tab: ReportScreen(),
-                icon: Icons.camera_alt,
-                title: 'بلاغ',
+                tab: CompanyReports(),
+                icon: Icons.restore_from_trash_outlined,
+                title: 'البلاغات',
                 navigatorkey: _tab2navigatorKey,
               ),
               PersistentTabItem(
-                tab: NotificationScreen(),
-                icon: Icons.notifications,
-                title: 'الإشعارات',
+                tab: TasksReports(),
+                icon: Icons.task_alt,
+                title: 'المهام',
                 navigatorkey: _tab3navigatorKey,
               ),
-
+              PersistentTabItem(
+                tab: Profile(),
+                icon: Icons.person,
+                title: 'الملف الشخصي',
+                navigatorkey: _tab4navigatorKey,
+              ),
 
             ],
           ),

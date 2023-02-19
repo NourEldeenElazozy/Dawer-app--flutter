@@ -24,7 +24,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async  {
 
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.dark,
   ));
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,8 +43,8 @@ class DoctorApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.light(primary: ColorResources.green009),
-        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+        colorScheme: const ColorScheme.light(primary: ColorResources.green009),
+        buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
         fontFamily: TextFontFamily.AVENIR_LT_PRO_BOOK,
       ),
       home: WelcomeScreen(),

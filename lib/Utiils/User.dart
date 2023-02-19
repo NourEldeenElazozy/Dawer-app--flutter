@@ -8,3 +8,13 @@ class User {
   static var documentID;
   static var ticket;
 }
+class ReportDet {
+
+  static var documentID ;
+  static var dateAdded;
+  static var description;
+  static var image;
+  static var location;
+  static var typeReport;
+
+}

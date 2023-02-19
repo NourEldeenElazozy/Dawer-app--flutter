@@ -39,134 +39,138 @@ class Profile extends StatelessWidget {
 
 
     your_async_method();
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            width: 450,
-            height: 100,
-            margin: const EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.indigo.withOpacity(0.4),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                color: ColorResources.custom),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Icon(
-                                Icons.tag_faces_rounded,
-                                color: ColorResources.yellow,
-                                size: 40.0,
-                              ),
-                              Column(
-                                children: [
-                                  bookText(
-                                      User.name, ColorResources.whiteF6F, 25),
-                                  bookText(User.phone.toString(),
-                                      ColorResources.whiteF6F, 25),
-                                ],
-                              ),
-                              Container(
-                                child: Row(
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(backgroundColor: ColorResources.green129,),
+        body: Column(
+          children: [
+            Container(
+              width: 450,
+              height: 100,
+              margin: const EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.indigo.withOpacity(0.4),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                  color: ColorResources.custom),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Icon(
+                                  Icons.tag_faces_rounded,
+                                  color: ColorResources.yellow,
+                                  size: 40.0,
+                                ),
+                                Column(
                                   children: [
-                                    mediumText(
-                                        User.numOfOrders.toString()+' بلاغ ', ColorResources.yellow, 20),
-                                    const Icon(
-                                      Icons.transfer_within_a_station_sharp,
-                                      color: ColorResources.yellow,
-                                      size: 40.0,
-                                    ),
+                                    bookText(
+                                        User.name, ColorResources.whiteF6F, 25),
+                                    bookText(User.phone.toString(),
+                                        ColorResources.whiteF6F, 25),
                                   ],
                                 ),
-                              )
-                            ],
+                                Container(
+                                  child: Row(
+                                    children: [
+                                      mediumText(
+                                          User.numOfOrders.toString()+' بلاغ ', ColorResources.yellow, 20),
+                                      const Icon(
+                                        Icons.transfer_within_a_station_sharp,
+                                        color: ColorResources.yellow,
+                                        size: 40.0,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            color: Colors.black,
-            height: 2,
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 20.0),
-                child: Icon(
-                  Icons.support_agent,
-                  color: ColorResources.yellow,
-                  size: 40.0,
-                ),
+                      ],
+                    ),
+                  )
+                ],
               ),
-
-              InkWell(
-                onTap: (){
-                  Get.to(chatpage(email:User.name,));
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      bookText('خدمة العملاء', ColorResources.black, 25),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-          SizedBox(height: 20),
-          InkWell(
-            onTap: (){
-      showDialog(
-           context: context,
-           builder: (BuildContext context) {
-          return alertDialog();
-            },);},
-            child: Row(
+            ),
+            Container(
+              color: Colors.black,
+              height: 2,
+            ),
+            SizedBox(height: 20),
+            Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Padding(
                   padding: EdgeInsets.only(left: 20.0),
                   child: Icon(
-                    Icons.lock,
+                    Icons.support_agent,
                     color: ColorResources.yellow,
                     size: 40.0,
                   ),
                 ),
 
-                Container(
-                  child: Row(
-                    children: [
-                      bookText('تغيير كلمة المرور', ColorResources.black, 25),
-                    ],
+                InkWell(
+                  onTap: (){
+                    Get.to(chatpage(email:User.name,));
+                  },
+                  child: Container(
+                    child: Row(
+                      children: [
+                        bookText('خدمة العملاء', ColorResources.black, 25),
+                      ],
+                    ),
                   ),
                 )
               ],
             ),
-          ),
-        ],
+            SizedBox(height: 20),
+            InkWell(
+              onTap: (){
+        showDialog(
+             context: context,
+             builder: (BuildContext context) {
+            return alertDialog();
+              },);},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Icon(
+                      Icons.lock,
+                      color: ColorResources.yellow,
+                      size: 40.0,
+                    ),
+                  ),
+
+                  Container(
+                    child: Row(
+                      children: [
+                        bookText('تغيير كلمة المرور', ColorResources.black, 25),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

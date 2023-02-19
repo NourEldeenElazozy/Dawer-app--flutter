@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   logInmethod(phone, pass) async {
     await FirebaseFirestore.instance
         .collection('users')
+
         .where("phone", isEqualTo: phone.toString())
         .where("password", isEqualTo: pass.toString())
         .get()

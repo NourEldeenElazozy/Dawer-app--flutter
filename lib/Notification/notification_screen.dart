@@ -27,7 +27,7 @@ class NotificationScreen extends StatelessWidget {
                         width: 450,
                         height: 180,
 
-                        margin: EdgeInsets.all(12.0),
+                        margin: const EdgeInsets.all(12.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30.0),
                             boxShadow: [
@@ -35,7 +35,7 @@ class NotificationScreen extends StatelessWidget {
                                 color: Colors.indigo.withOpacity(0.4),
                                 spreadRadius: 5,
                                 blurRadius: 7,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset: const Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           color: ColorResources.whiteF6F
@@ -49,8 +49,11 @@ class NotificationScreen extends StatelessWidget {
                                 children: [
                                   Center(
                                     child: Row(
+
                                       children:  [
-                                       Image(image: AssetImage('assets/images/logo.png'),width: 120,height: 120,fit: BoxFit.cover),
+                                       const Image(image: AssetImage('assets/images/logo.png'),width: 50,height: 50,fit: BoxFit.cover),
+                                        SizedBox(width: 20,),
+
                                         bookText(
                                             documentSnapshot['title'], ColorResources.grey777, 25),
 
