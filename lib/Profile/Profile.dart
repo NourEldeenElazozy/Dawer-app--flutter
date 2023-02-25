@@ -1,3 +1,4 @@
+import 'package:dawerf/Profile/Profile2.dart';
 import 'package:dawerf/Utiils/User.dart';
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
@@ -6,286 +7,217 @@ import 'package:dawerf/chatpage..dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-class Profile extends StatelessWidget {
 
-  final Stream<QuerySnapshot> products = FirebaseFirestore.instance.collection('users').snapshots();
-   Profile({Key? key}) : super(key: key);
 
-  your_async_method () async {
-
-    await FirebaseFirestore.instance.collection('users').where(
-      "name",
-        isEqualTo: "فراس"
-    ).get().then((event) {
-      if (event.docs.isNotEmpty) {
-        Map<String, dynamic> documentData = event.docs.single.data(); //if it is a single document
-        print('documentData');
-        print(documentData['name']);
-      }
-    }).catchError((e) => print("error fetching data: $e"));
-  }
-
+class Profile extends StatefulWidget {
 
 
 
 
   @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+
+  @override
   Widget build(BuildContext context) {
+    final _width = MediaQuery.of(context).size.width;
+    final _height = MediaQuery.of(context).size.height;
 
+    final Stream<QuerySnapshot> products = FirebaseFirestore.instance.collection('users').snapshots();
+    your_async_method () async {
 
+      await FirebaseFirestore.instance.collection('users').where(
+          "name",
+          isEqualTo: "فراس"
+      ).get().then((event) {
+        if (event.docs.isNotEmpty) {
+          Map<String, dynamic> documentData = event.docs.single.data(); //if it is a single document
+          print('documentData');
+          print(documentData['name']);
+        }
+      }).catchError((e) => print("error fetching data: $e"));
+    }
 
-// Remove the 'service' field from the document
-
-
-
-    your_async_method();
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(backgroundColor: ColorResources.green129,),
-        body: Column(
-          children: [
-            Container(
-              width: 450,
-              height: 100,
-              margin: const EdgeInsets.all(12.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.indigo.withOpacity(0.4),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                  color: ColorResources.custom),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                const Icon(
-                                  Icons.tag_faces_rounded,
-                                  color: ColorResources.yellow,
-                                  size: 40.0,
-                                ),
-                                Column(
-                                  children: [
-                                    bookText(
-                                        User.name, ColorResources.whiteF6F, 25),
-                                    bookText(User.phone.toString(),
-                                        ColorResources.whiteF6F, 25),
-                                  ],
-                                ),
-                                Container(
-                                  child: Row(
-                                    children: [
-                                      mediumText(
-                                          User.numOfOrders.toString()+' بلاغ ', ColorResources.yellow, 20),
-                                      const Icon(
-                                        Icons.transfer_within_a_station_sharp,
-                                        color: ColorResources.yellow,
-                                        size: 40.0,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+        appBar: AppBar(backgroundColor: ColorResources.blue0C1,),
+        body: Container(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      ColorResources.blue0C1,
+                      ColorResources.custom,
+                    ], begin: Alignment.topCenter, end: Alignment.center)),
+              ),
+              Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Container(
+                  child: Stack(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: _height / 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              CircleAvatar(
+
+                                backgroundImage:
+                                AssetImage('assets/images/logo.png'),backgroundColor: ColorResources.white,
+                                radius: _height / 10,
+                              ),
+                              SizedBox(
+                                height: _height / 30,
+                              ),
+                              mediumText(
+                                  User.name.toString(), ColorResources.greyA0A, 20),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.black,
-              height: 2,
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Icon(
-                    Icons.support_agent,
-                    color: ColorResources.yellow,
-                    size: 40.0,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: _height / 2.2),
+                        child: Container(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: _height / 2.6,
+                            left: _width / 20,
+                            right: _width / 20),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: ColorResources.custom,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black45,
+                                        blurRadius: 2.0,
+                                        offset: Offset(0.0, 2.0))
+                                  ]),
+                              child: Padding(
+                                padding: EdgeInsets.all(_width / 20),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      mediumText(
+                                          User.numOfOrders.toString()+' بلاغ ', ColorResources.greyA0A, 20),
+                                      Image.asset(
+
+                                        'assets/images/recycle-symbol.png',
+                                        width: 24,
+                                        height:24,
+                                      ),
+
+                                    ]),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: _height / 20),
+                              child: Column(
+                                children: <Widget>[
+                                  InkWell(
+
+                                    child: infoChild(
+                                        _width, Icons.support_agent, 'خدمة العملاء'),
+                                    onTap: (){
+                                      Get.to(chatpage(email:User.name,));
+                                    },
+                                  ),
+
+                                  InkWell(
+                                    onTap: (){
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return alertDialog();
+                                        },);},
+                                    child: infoChild(
+                                        _width, Icons.lock, 'تغيير كلمة المرور'),
+                                  ),
+
+                                  Padding(
+                                    padding: EdgeInsets.only(top: _height / 30),
+                                    child: Container(
+                                      width: _width / 3,
+                                      height: _height / 20,
+                                      decoration: BoxDecoration(
+                                          color: ColorResources.redF22,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(_height / 40)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black87,
+                                                blurRadius: 2.0,
+                                                offset: Offset(0.0, 1.0))
+                                          ]),
+                                      child: Center(
+                                        child:  mediumText("خروج",ColorResources.white,16),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-
-                InkWell(
-                  onTap: (){
-                    Get.to(chatpage(email:User.name,));
-                  },
-                  child: Container(
-                    child: Row(
-                      children: [
-                        bookText('خدمة العملاء', ColorResources.black, 25),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: 20),
-            InkWell(
-              onTap: (){
-        showDialog(
-             context: context,
-             builder: (BuildContext context) {
-            return alertDialog();
-              },);},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20.0),
-                    child: Icon(
-                      Icons.lock,
-                      color: ColorResources.yellow,
-                      size: 40.0,
-                    ),
-                  ),
-
-                  Container(
-                    child: Row(
-                      children: [
-                        bookText('تغيير كلمة المرور', ColorResources.black, 25),
-                      ],
-                    ),
-                  )
-                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
-class alertDialog extends StatefulWidget {
-  @override
-  State<alertDialog> createState() => _alertDialogState();
-}
 
-class _alertDialogState extends State<alertDialog> {
+  Widget headerChild(String header, String value) => Expanded(
+      child: Column(
+        children: <Widget>[
+          mediumText(header,ColorResources.black,16),
+          SizedBox(
+            height: 8.0,
+          ),
+          Text(
+            '$value',
+            style: TextStyle(
+                fontSize: 14.0,
+                color: const Color(0xFF26CBE6),
+                fontWeight: FontWeight.bold,fontFamily: TextFontFamily.KHALED_FONT),
+          )
+        ],
+      ));
 
-
-  var passwordController = TextEditingController();
-
-  var passwordController2 = TextEditingController();
-
- void  a;
-  ChangePass(pass)async{
-    await  FirebaseFirestore.instance.collection("users").doc(User.documentID)
-        .update({"password": pass}).then(
-      (value) {
-        User.password=pass;
-      },
-    );
-  }
-  @override
-  Widget build(BuildContext context) {
-  return Directionality(
-    textDirection: TextDirection.rtl,
-    child: AlertDialog(
-
-    scrollable: true,
-    title: mediumText('تغيير كلمة المرور',ColorResources.black,18),
-    content: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Form(
-    child: Column(
-    children: <Widget>[
-    TextFormField(
-      controller: passwordController,
-    decoration: InputDecoration(
-    labelText: 'كلمة المرور الحالية',labelStyle: TextStyle(fontFamily: TextFontFamily.KHALED_FONT),
-    icon: Icon(Icons.lock_clock),
-    ),
-    ),
-      TextFormField(
-        controller: passwordController2,
-        decoration: InputDecoration(
-          labelText: 'كلمة المرور الجديدة',labelStyle: TextStyle(fontFamily: TextFontFamily.KHALED_FONT),
-          icon: Icon(Icons.lock_person),
-        ),
-      ),
-      MaterialButton(
-
-        color: ColorResources.custom,
-        onPressed: (){
-          if(passwordController.text!=User.password){
-            final snackBar = SnackBar(
-              content: mediumText(
-                  'اسم المستخدم او كلمة المرور غير صحيحة',
-                  ColorResources.whiteF6F,
-                  14),
-              backgroundColor: (Colors.red),
-              action: SnackBarAction(
-                label: 'موافق',
-                onPressed: () {},
-              ),
-            );
-            ScaffoldMessenger.of(context)
-                .showSnackBar(snackBar);
-
-          }
-          else if(passwordController2.text.length <4){
-            final snackBar = SnackBar(
-              content: mediumText(
-                  'يجب ان تكون كلمة المرور اكثر من 4 حقول',
-                  ColorResources.whiteF6F,
-                  14),
-              backgroundColor: (Colors.red),
-              action: SnackBarAction(
-                label: 'موافق',
-                onPressed: () {},
-              ),
-            );
-            ScaffoldMessenger.of(context)
-                .showSnackBar(snackBar);
-
-          }
-          else{
-            ChangePass(passwordController2.text);
-            final snackBar = SnackBar(
-              content: mediumText(
-                  'تم تغيير كلمة المرور بنجاح',
-                  ColorResources.whiteF6F,
-                  14),
-              backgroundColor: (Colors.green),
-              action: SnackBarAction(
-                label: 'موافق',
-                onPressed: () {},
-              ),
-            );
-            ScaffoldMessenger.of(context)
-                .showSnackBar(snackBar);
-            Get.back();
-          }
-
-        },
-        child:mediumText('تأكيد',ColorResources.whiteF6F,18),
+  Widget infoChild(double width, IconData icon, data) => Padding(
+    padding: EdgeInsets.only(bottom: 8.0),
+    child: InkWell(
+      child: Row(
+        children: <Widget>[
+          SizedBox(
+            width: width / 10,
+          ),
+          Icon(
+            icon,
+            color: ColorResources.custom,
+            size: 36.0,
+          ),
+          SizedBox(
+            width: width / 20,
+          ),
+          mediumText(data,ColorResources.black,16),
+        ],
       ),
 
-    ],
-    ),
-    ),
-    ),
     ),
   );
-  }
 }

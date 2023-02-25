@@ -116,7 +116,7 @@ class _TasksReportsState extends State<TasksReports> {
                                   offset: Offset(0, 3), // changes position of shadow
                                 ),
                               ],
-                              color: ColorResources.green009
+                              color: ColorResources.custom
 
                           ),
                           child: Padding(

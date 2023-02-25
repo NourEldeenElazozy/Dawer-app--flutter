@@ -3,6 +3,7 @@ import 'package:dawerf/HomePage.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
+import 'package:dawerf/Utiils/text_font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dawerf/Utiils/User.dart';
@@ -63,8 +64,8 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: ColorResources.green129,
-            title: const Text('D A W E R', textAlign: TextAlign.center),
+            backgroundColor: ColorResources.custom,
+            title:  mediumText('عودة الحياة',ColorResources.white,18),
           ),
           body: Form(
             key: formKey,
@@ -79,8 +80,11 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                         image: AssetImage('assets/images/logo.png'),
                         height: 250.0,
                       ),
-                      const Text(
-                        'سجل دخولك كي تتمكن من استخدام التطبيق',
+
+                      mediumText(
+                          'مرحباً بك  معًا من أجل بيئة نظيفة',
+                          ColorResources.blue0C1,
+                          18
                       ),
                       const SizedBox(
                         height: 20.0,
@@ -98,10 +102,11 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                           }
                           return null;
                         },
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           prefixIcon: Icon(
                             Icons.phone,
                           ),
+                          labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: "رقم الهاتف ",
                           border: OutlineInputBorder(),
                         ),
@@ -134,6 +139,7 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                               });
                             },
                           ),
+                          labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: 'كلمة المرور',
                           border: const OutlineInputBorder(),
                         ),
@@ -145,7 +151,7 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                         height: 40.0,
                         width: double.infinity,
                         child: MaterialButton(
-                            color: ColorResources.green129,
+                            color: ColorResources.custom,
                             onPressed: () async {
                               print(mobileController.text);
                               print(passwordController.text);
@@ -168,7 +174,7 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else if (test == 'yes data') {
-                                   Get.offAll(HomePageCompany());
+                                  Get.off(HomePageCompany());
                                 }
 
                                 /*
@@ -181,22 +187,12 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                            */
                               }
                             },
-                            child: const Text('دخول')),
+                            child:  mediumText('دخول',ColorResources.white,14)),
                       ),
                       const SizedBox(
                         height: 10.0,
                       ),
-                      Center(
-                        child: InkWell(
-                          onTap: () {},
-                          child: const Text(
-                            "سجل الأن",
-                            style: TextStyle(
-                                color: Colors.blue,
-                                decoration: TextDecoration.underline),
-                          ),
-                        ),
-                      )
+
                     ],
                   ),
                 ),

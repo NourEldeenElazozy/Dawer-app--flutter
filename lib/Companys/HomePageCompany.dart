@@ -24,7 +24,7 @@ class _HomePageCompanyState extends State<HomePageCompany> {
 
   final _tab3navigatorKey = GlobalKey<NavigatorState>();
 
-  final _tab4navigatorKey = GlobalKey<NavigatorState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _HomePageCompanyState extends State<HomePageCompany> {
 
       textDirection: TextDirection.rtl,
       child: Scaffold(
-       appBar: AppBar(backgroundColor: ColorResources.green129,),
+       appBar: AppBar(backgroundColor: ColorResources.custom,),
         body: Container(
           child: PersistentBottomBarScaffold(
             items: [
@@ -57,12 +57,7 @@ class _HomePageCompanyState extends State<HomePageCompany> {
                 title: 'المهام',
                 navigatorkey: _tab3navigatorKey,
               ),
-              PersistentTabItem(
-                tab: Profile(),
-                icon: Icons.person,
-                title: 'الملف الشخصي',
-                navigatorkey: _tab4navigatorKey,
-              ),
+
 
             ],
           ),

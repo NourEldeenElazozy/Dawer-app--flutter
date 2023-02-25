@@ -1,5 +1,6 @@
 import 'package:dawerf/AuthScreens/Login.dart';
 import 'package:dawerf/AuthScreens/Login_company.dart';
+import 'package:dawerf/AuthScreens/Register.dart';
 import 'package:dawerf/HomePage.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Utiils/colors.dart';
@@ -31,50 +32,104 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: ColorResources.green129,
-            title: const Text('D A W E R', textAlign: TextAlign.center),
+            backgroundColor: ColorResources.custom,
+            title:  mediumText('عودة الحياة',ColorResources.white,18),
           ),
-          body:Column(
+          body:Stack(
             children: [
-              Center(
-                child: Container(
-                  child:  const Image(
-                    image: AssetImage('assets/images/logo.png'),
-                    height: 200.0,
-                  ),
+
+
+
+              Container(
+                color: Colors.white,
+
+                child: Column(
+
+                  children: [
+                    Center(
+                      child: Container(
+                        child:  const Image(
+                          image: AssetImage('assets/images/logo.png'),
+                          fit: BoxFit.cover,
+
+                          height: 200.0,
+                        ),
+                      ),
+
+                    ),
+                    SizedBox(
+                      height: 150,
+                    ),
+                    Column(
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            Get.to(LoginScreen());
+                          },
+                          child: Padding(padding: EdgeInsets.all(20),
+                            child:commonButton(null, ' تسجيل دخول', ColorResources.custom, ColorResources.whiteF6F) ,
+
+                          ),
+                        ),
+                        Divider(),
+                        InkWell(
+                          onTap: (){
+                            Get.to(RigesterScreen());
+                          },
+                          child: Padding(padding: EdgeInsets.all(20),
+                            child:commonButton2(null , 'انشاء حساب', ColorResources.white, ColorResources.custom) ,
+
+                          ),
+                        ),
+                      Divider(),
+
+                     TextButton(
+                         onPressed: (){
+                           Get.to(LoginCompanyScreen());
+                           },
+                         child: mediumText('الدخول كشركة', ColorResources.blue0C1, 18)),
+
+                      ],
+                    ),
+
+
+                  ],
+
                 ),
-
               ),
-              Column(
-                children: [
-                  InkWell(
-                    onTap: (){
-                      Get.to(LoginCompanyScreen());
-                    },
-                    child: Padding(padding: EdgeInsets.all(20),
-                      child:commonButton(null, 'شركة خاصة', ColorResources.blue0C1, ColorResources.whiteF6F) ,
+              Container(
+                width: double.infinity,
+                height: 350,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+
+                            'assets/images/login.png',
+                          ),
+                          fit: BoxFit.fill,),),
+                    ),
+                    Center(
+                      child: Container(
+                        child:  const Image(
+                          image: AssetImage('assets/images/logo.png'),
+                          height: 300.0,
+                        ),
+                      ),
 
                     ),
-                  ),
-                  Divider(),
-                  InkWell(
-                    onTap: (){
-                      Get.to(LoginScreen());
-                    },
-                    child: Padding(padding: EdgeInsets.all(20),
-                      child:commonButton(null , 'مستخدم', ColorResources.custom, ColorResources.whiteF6F) ,
 
-                    ),
-                  ),
+                  ],
+                ),
+             ),
 
-                ],
-              )
 
             ],
-
           )
 
       ),

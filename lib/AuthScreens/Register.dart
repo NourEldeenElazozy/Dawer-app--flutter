@@ -1,3 +1,4 @@
+import 'package:dawerf/AuthScreens/Login.dart';
 import 'package:dawerf/HomePage.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Utiils/colors.dart';
@@ -9,49 +10,36 @@ import 'package:dawerf/Utiils/User.dart';
 
 import 'package:get/get.dart';
 
-class LoginScreen extends StatefulWidget {
+class RigesterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RigesterScreenState createState() => _RigesterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RigesterScreenState extends State<RigesterScreen> {
   late String test;
-  logInmethod(phone, pass) async {
-    await FirebaseFirestore.instance
-        .collection('users')
+  CollectionReference User = FirebaseFirestore.instance.collection('users');
+  Future<void> Rigistermethod(name,phone,city,pass) {
+    // Call the user's CollectionReference to add a new user
+    return User
+        .add({
+      'name': name, // John Doe
+      'phone': phone, // Stokes and Sons
+      'city': city,
+      'pass': pass,
+      'numOfOrders': 0,
 
-        .where("phone", isEqualTo: phone.toString())
-        .where("password", isEqualTo: pass.toString())
-        .get()
-        .then((event) {
-      if (event.docs.isNotEmpty) {
-        Map<String, dynamic> documentData =
-            event.docs.single.data(); //if it is a single document
 
-        event.docs.forEach((f) {
-          User.documentID = f.reference.id;
-          print("documentID---- ${f.reference.id}");
-        });
-
-        test = "yes data";
-        User.name = documentData['name'];
-        User.phone = documentData['phone'];
-        User.password = documentData['password'];
-        User.city = documentData['city'];
-        User.numOfOrders = documentData['numOfOrders'];
-        //test=documentData['name'];
-        print("yes data");
-      }
-      if (event.docs.isEmpty) {
-        test = "no data";
-        print(test);
-      }
-    }).catchError((e) => print("error fetching data: $e"));
+    })
+        .then((value) => test='yes data')
+        .catchError((error) => test='no data');
   }
 
-  bool _isObscure = true;
-  var mobileController = TextEditingController();
 
+  bool _isObscure = true;
+
+  var cityController = TextEditingController();
+  var nameController = TextEditingController();
+  var mobileController = TextEditingController();
   var passwordController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
@@ -81,13 +69,70 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 250.0,
                       ),
 
-                       mediumText(
-                        'مرحباً بك  معًا من أجل بيئة نظيفة',
-                         ColorResources.blue0C1,
-                           18
+                      mediumText(
+                          'مرحباً بك  معًا من أجل بيئة نظيفة',
+                          ColorResources.blue0C1,
+                          18
+                      ),const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        enabled: true,
+                        keyboardType: TextInputType.name,
+
+                        controller: nameController,
+                        //controller: emailController..text = '119900408110',
+                        validator: (value) {
+                          if (value!.length <=3 ) {
+                            print('dd');
+                            return 'يجب ان يكون اسم المستخدم اكبر من 3 حروف';
+                          }
+                          if (value == null || value.isEmpty) {
+                            print('dd');
+                            return 'error';
+                          }
+                          return null;
+                        },
+                        decoration:  InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.person,
+                          ),
+                          labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
+                          labelText: "اسم المستخدم",
+                          border: OutlineInputBorder(),
+                        ),
                       ),
                       const SizedBox(
-                        height: 20.0,
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                        enabled: true,
+                        keyboardType: TextInputType.name,
+
+                        controller: cityController,
+                        //controller: emailController..text = '119900408110',
+                        validator: (value) {
+                          if (value!.length <=3 ) {
+                            print('dd');
+                            return 'يجب ان يكون اسم المدينة اكبر من 3 حروف';
+                          }
+                          if (value == null || value.isEmpty) {
+                            print('dd');
+                            return 'error';
+                          }
+                          return null;
+                        },
+                        decoration:  InputDecoration(
+                          prefixIcon: Icon(
+                            Icons. location_on_outlined,
+                          ),
+                          labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
+                          labelText: "المدينة",
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
                       ),
                       TextFormField(
                         enabled: true,
@@ -156,13 +201,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               print(mobileController.text);
                               print(passwordController.text);
                               if (formKey.currentState!.validate()) {
-                                await logInmethod(
+                                await Rigistermethod(
+                                  nameController.text.toString(),
                                     mobileController.text.toString(),
-                                    passwordController.text.toString());
+                                  cityController.text.toString(),
+                                    passwordController.text.toString(),
+                                );
                                 if (test == 'no data') {
                                   final snackBar = SnackBar(
                                     content: mediumText(
-                                        'اسم المستخدم او كلمة المرور غير صحيحة',
+                                        'خطاء في بيانات التسجيل',
                                         ColorResources.whiteF6F,
                                         14),
                                     backgroundColor: (Colors.red),
@@ -174,7 +222,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else if (test == 'yes data') {
-                                   Get.off(HomePage());
+                                  final snackBar = SnackBar(
+                                    content: mediumText(
+                                        'تم التسجيل بنجاح',
+                                        ColorResources.whiteF6F,
+                                        14),
+                                    backgroundColor: (Colors.green),
+                                    action: SnackBarAction(
+                                      label: 'موافق',
+                                      onPressed: () {},
+                                    ),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                  Get.offAll(LoginScreen());
                                 }
 
                                 /*
@@ -187,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                            */
                               }
                             },
-                            child:  mediumText('دخول',ColorResources.white,14)),
+                            child:  mediumText('تسجيل',ColorResources.white,14)),
                       ),
                       const SizedBox(
                         height: 10.0,

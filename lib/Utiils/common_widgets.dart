@@ -72,7 +72,21 @@ commonButton(onTap, text,buttonColor,textColor) => InkWell(
     ),
   ),
 );
-
+commonButton2(onTap, text,buttonColor,textColor) => InkWell(
+  onTap: onTap,
+  child: Container(
+    height: 60,
+    width: Get.width,
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.blueAccent),
+      color: buttonColor,
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: Center(
+      child: heavyText(text,textColor, 18),
+    ),
+  ),
+);
 
 textField1(hintText,controller,keyBoardType) => TextFormField(
 

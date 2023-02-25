@@ -29,7 +29,7 @@ class _ReportDetailsState extends State<ReportDetails> {
    return Directionality(
      textDirection: TextDirection.rtl,
      child: Scaffold(
-       appBar: AppBar(backgroundColor: ColorResources.green129,),
+       appBar: AppBar(backgroundColor: ColorResources.custom,),
        body: Padding(
          padding: const EdgeInsets.all(8.0),
          child: SingleChildScrollView(

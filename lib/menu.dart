@@ -76,8 +76,8 @@ class _PersistentBottomBarScaffoldState
               icon: Column(
                 children: [
 
-                  Icon(item.icon,color: ColorResources.green009),
-                  mediumText(item.title,ColorResources.green, 16),
+                  Icon(item.icon,color: ColorResources.custom),
+                  mediumText(item.title,ColorResources.grey777, 16),
                 ],
               ), ))
               .toList(),
