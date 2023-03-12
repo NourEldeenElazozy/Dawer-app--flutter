@@ -11,7 +11,9 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Column(
+
         children: [
           Flexible(
             child: StreamBuilder(
@@ -24,13 +26,11 @@ class NotificationScreen extends StatelessWidget {
                       final DocumentSnapshot documentSnapshot =
                       streamSnapshot.data!.docs[index];
                       return Row(
-
+mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                           Container(
-                              width: 80,
-                               child: Image(image: AssetImage('assets/images/logo.png'),fit: BoxFit.cover)),
+
                           Container(
-                            width: 300,
+                            width: 350,
                             height: 120,
 
                             margin: const EdgeInsets.all(10.0),

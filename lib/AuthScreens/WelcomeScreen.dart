@@ -74,7 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                           ),
                         ),
-                        Divider(),
+
                         InkWell(
                           onTap: (){
                             Get.to(RigesterScreen());
@@ -84,7 +84,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                           ),
                         ),
-                      Divider(),
+
 
                      TextButton(
                          onPressed: (){

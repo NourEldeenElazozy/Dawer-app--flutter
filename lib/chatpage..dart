@@ -96,7 +96,7 @@ print( User.ticket);
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(backgroundColor: ColorResources.green129,title:
+        appBar: AppBar(backgroundColor: ColorResources.custom,title:
           mediumText(
            'الدعم الفني',ColorResources.whiteF6F,22
         )),

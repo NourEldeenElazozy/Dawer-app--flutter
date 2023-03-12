@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
       textDirection: TextDirection.rtl,
       child: Scaffold(
-       appBar: AppBar(backgroundColor: ColorResources.custom,),
+       appBar: AppBar(backgroundColor: ColorResources.custom, automaticallyImplyLeading: false,),
         body: Container(
           child: PersistentBottomBarScaffold(
             items: [
