@@ -32,6 +32,9 @@ class _DawerHomeState extends State<DawerHome> {
   final CollectionReference containers =
       FirebaseFirestore.instance.collection('containers');
 
+  final CollectionReference advertisement =
+  FirebaseFirestore.instance.collection('advertisement');
+
   //استدعاء الإعلانات
   final CollectionReference ads = FirebaseFirestore.instance.collection('ads');
 
@@ -45,25 +48,8 @@ class _DawerHomeState extends State<DawerHome> {
               child: Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(100)
-                          //more than 50% of width makes circle
-                          ),
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.person,
-                        ),
-                        color: Colors.grey.shade500,
-                        onPressed: () {
-                          Get.to(Profile());
-                        },
-                      ),
-                    ),
+                    padding: const EdgeInsets.all(15.0),
+
                   )
                 ],
               ),
@@ -121,7 +107,8 @@ class _DawerHomeState extends State<DawerHome> {
             SizedBox(
               height: 15,
             ),
-            Row(
+            /*
+               Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
@@ -133,7 +120,7 @@ class _DawerHomeState extends State<DawerHome> {
                         Colors.cyan,
 
                       "assets/images/Vector.png",
-                        
+
                         'الأخبار'),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -166,27 +153,15 @@ class _DawerHomeState extends State<DawerHome> {
                 ),
               ],
             ),
+             */
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  mediumText("جميع صناديق القمامة", ColorResources.grey777, 16),
-                  DropdownButton(
-                    value: dropdownvalue,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownvalue = newValue!;
-                      });
-                    },
-                  ),
+                  mediumText("مايحدث الأن", ColorResources.black, 16),
+
                 ],
               ),
             ),
@@ -194,22 +169,22 @@ class _DawerHomeState extends State<DawerHome> {
               width: double.infinity,
               height: 250,
               child: StreamBuilder(
-                stream: containers.snapshots(), //build connection
+                stream: advertisement.snapshots(), //build connection
                 builder:
                     (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                   if (streamSnapshot.hasData) {
                     return ListView.builder(
                       itemCount:
-                          streamSnapshot.data!.docs.length, //number of rows
+                      streamSnapshot.data!.docs.length, //number of rows
                       itemBuilder: (context, index) {
                         final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[index];
+                        streamSnapshot.data!.docs[index];
                         return Container(
                           width: 500,
                           height: 200,
                           margin: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.circular(10.0),
                             image: DecorationImage(
                               image: NetworkImage(documentSnapshot['image']),
                               fit: BoxFit.cover,
@@ -217,16 +192,7 @@ class _DawerHomeState extends State<DawerHome> {
                           ),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    bookText(documentSnapshot['address'],
-                                        ColorResources.whiteF6F, 40),
-                                  ],
-                                ),
-                              )
+
                             ],
                           ),
                         );
@@ -239,7 +205,8 @@ class _DawerHomeState extends State<DawerHome> {
                   );
                 },
               ),
-            )
+            ),
+
           ],
         ),
       ),

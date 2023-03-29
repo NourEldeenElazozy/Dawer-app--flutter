@@ -3,6 +3,7 @@ import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
 import 'package:dawerf/Utiils/text_font_family.dart';
+import 'package:dawerf/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dawerf/Utiils/User.dart';
@@ -174,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else if (test == 'yes data') {
-                                   Get.off(HomePage());
+                                   Get.off(BottomNavBar());
                                 }
 
                                 /*

@@ -35,32 +35,10 @@ class _HomePageCompanyState extends State<HomePageCompany> {
 
       textDirection: TextDirection.rtl,
       child: Scaffold(
-       appBar: AppBar(backgroundColor: ColorResources.custom,),
+       appBar: AppBar(backgroundColor: ColorResources.custom,automaticallyImplyLeading: false),
+
         body: Container(
-          child: PersistentBottomBarScaffold(
-            items: [
-              PersistentTabItem(
-                tab: DawerHome(),
-                icon: Icons.home,
-                title: 'الرئيسية',
-                navigatorkey: _tab1navigatorKey,
-              ),
-              PersistentTabItem(
-                tab: CompanyReports(),
-                icon: Icons.restore_from_trash_outlined,
-                title: 'البلاغات',
-                navigatorkey: _tab2navigatorKey,
-              ),
-              PersistentTabItem(
-                tab: TasksReports(),
-                icon: Icons.task_alt,
-                title: 'المهام',
-                navigatorkey: _tab3navigatorKey,
-              ),
 
-
-            ],
-          ),
 
         ),
       ),

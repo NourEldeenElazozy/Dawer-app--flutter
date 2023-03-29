@@ -1,4 +1,7 @@
+import 'package:dawerf/Companys/Company_Reports.dart';
 import 'package:dawerf/Companys/HomePageCompany.dart';
+import 'package:dawerf/Companys/ReportDetiles.dart';
+import 'package:dawerf/Companys/Tasks.dart';
 import 'package:dawerf/HomePage.dart';
 import 'package:dawerf/HomeScreen/Containers.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
@@ -8,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import 'package:get/get.dart';
-class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+class Co_BottomNavBar extends StatelessWidget {
+  const Co_BottomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,9 @@ class BottomNavBar extends StatelessWidget {
     List<Widget> _buildScreens() {
       return [
         DawerHome(),
-        Containers(),
+        CompanyReports(),
         DawerHome(),
-        NotificationScreen(),
+        TasksReports(),
         Profile(),
 
 
@@ -37,8 +40,8 @@ class BottomNavBar extends StatelessWidget {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.location_on),
-          title: ("الحاويات"),
+          icon: const Icon(Icons.restore_from_trash_rounded),
+          title: ("البلاغات"),
           activeColorPrimary: Colors.deepPurple,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -48,8 +51,8 @@ class BottomNavBar extends StatelessWidget {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.notifications),
-          title: ("الإشعارات"),
+          icon: const Icon(Icons.task_alt_sharp),
+          title: ("المهام"),
           activeColorPrimary: Colors.deepPurple,
           inactiveColorPrimary: Colors.grey,
         ),

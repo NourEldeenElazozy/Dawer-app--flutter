@@ -35,30 +35,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
        appBar: AppBar(backgroundColor: ColorResources.custom, automaticallyImplyLeading: false,),
         body: Container(
-          child: PersistentBottomBarScaffold(
-            items: [
-              PersistentTabItem(
-                tab: DawerHome(),
-                icon: Icons.home,
-                title: 'الرئيسية',
-                navigatorkey: _tab1navigatorKey,
-              ),
-              PersistentTabItem(
-                tab: ReportScreen(),
-                icon: Icons.camera_alt,
-                title: 'بلاغ',
-                navigatorkey: _tab2navigatorKey,
-              ),
-              PersistentTabItem(
-                tab: NotificationScreen(),
-                icon: Icons.notifications,
-                title: 'الإشعارات',
-                navigatorkey: _tab3navigatorKey,
-              ),
-
-
-            ],
-          ),
+         
 
         ),
       ),

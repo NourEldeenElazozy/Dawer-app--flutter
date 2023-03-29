@@ -1,9 +1,11 @@
+import 'package:dawerf/Companys/Co_BottomNavBar.dart';
 import 'package:dawerf/Companys/HomePageCompany.dart';
 import 'package:dawerf/HomePage.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
 import 'package:dawerf/Utiils/text_font_family.dart';
+import 'package:dawerf/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dawerf/Utiils/User.dart';
@@ -174,7 +176,7 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else if (test == 'yes data') {
-                                  Get.off(HomePageCompany());
+                                  Get.to(Co_BottomNavBar());
                                 }
 
                                 /*
