@@ -4,6 +4,7 @@ import 'package:dawerf/HomeScreen/Containers.dart';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
 import 'package:dawerf/Notification/notification_screen.dart';
 import 'package:dawerf/Profile/Profile.dart';
+import 'package:dawerf/report.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -20,7 +21,7 @@ class BottomNavBar extends StatelessWidget {
       return [
         DawerHome(),
         Containers(),
-        DawerHome(),
+        ReportScreen(),
         NotificationScreen(),
         Profile(),
 

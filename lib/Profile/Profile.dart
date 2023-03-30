@@ -1,3 +1,4 @@
+import 'package:dawerf/AuthScreens/WelcomeScreen.dart';
 import 'package:dawerf/Profile/Profile2.dart';
 import 'package:dawerf/Utiils/User.dart';
 import 'package:dawerf/Utiils/colors.dart';
@@ -43,15 +44,15 @@ class _ProfileState extends State<Profile> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(backgroundColor: ColorResources.blue0C1,),
+        appBar: AppBar(backgroundColor:  Colors.deepOrange,),
         body: Container(
           child: Stack(
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      ColorResources.blue0C1,
-                      ColorResources.custom,
+                    Colors.deepOrange,
+                      Colors.orange,
                     ], begin: Alignment.topCenter, end: Alignment.center)),
               ),
               Scaffold(
@@ -76,7 +77,7 @@ class _ProfileState extends State<Profile> {
                                 height: _height / 30,
                               ),
                               mediumText(
-                                  User.name.toString(), ColorResources.greyA0A, 20),
+                                  User.name.toString(), ColorResources.black, 20),
                             ],
                           ),
                         ),
@@ -96,7 +97,7 @@ class _ProfileState extends State<Profile> {
                           children: <Widget>[
                             Container(
                               decoration: BoxDecoration(
-                                  color: ColorResources.custom,
+                                  color:  Colors.deepOrange,
                                   boxShadow: [
                                     BoxShadow(
                                         color: Colors.black45,
@@ -109,7 +110,7 @@ class _ProfileState extends State<Profile> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       mediumText(
-                                          User.numOfOrders.toString()+' بلاغ ', ColorResources.greyA0A, 20),
+                                          User.numOfOrders.toString()+' بلاغ ', ColorResources.black, 20),
                                       Image.asset(
 
                                         'assets/images/recycle-symbol.png',
@@ -146,21 +147,27 @@ class _ProfileState extends State<Profile> {
 
                                   Padding(
                                     padding: EdgeInsets.only(top: _height / 30),
-                                    child: Container(
-                                      width: _width / 3,
-                                      height: _height / 20,
-                                      decoration: BoxDecoration(
-                                          color: ColorResources.redF22,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(_height / 40)),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.black87,
-                                                blurRadius: 2.0,
-                                                offset: Offset(0.0, 1.0))
-                                          ]),
-                                      child: Center(
-                                        child:  mediumText("خروج",ColorResources.white,16),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.to(WelcomeScreen());
+                                      },
+                                      child: Container(
+
+                                        width: _width / 3,
+                                        height: _height / 20,
+                                        decoration: BoxDecoration(
+                                            color: ColorResources.redF22,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(_height / 40)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.black87,
+                                                  blurRadius: 2.0,
+                                                  offset: Offset(0.0, 1.0))
+                                            ]),
+                                        child: Center(
+                                          child:  mediumText("خروج",ColorResources.white,16),
+                                        ),
                                       ),
                                     ),
                                   )

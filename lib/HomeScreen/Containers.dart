@@ -2,6 +2,8 @@ import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class Containers extends StatefulWidget {
   const Containers({Key? key}) : super(key: key);
 
@@ -15,6 +17,13 @@ class _ContainersState extends State<Containers> {
     'بنغازي',
     'طرابلس',
   ];
+
+  Future<void> _launchUrl(String location) async {
+    final Uri url = Uri.parse('https://www.google.com/maps/$location');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
   final CollectionReference containers =
   FirebaseFirestore.instance.collection('containers');
   @override
@@ -63,30 +72,36 @@ class _ContainersState extends State<Containers> {
                         itemBuilder: (context, index) {
                           final DocumentSnapshot documentSnapshot =
                           streamSnapshot.data!.docs[index];
-                          return Container(
-                            width: 500,
-                            height: 200,
-                            margin: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
-                              image: DecorationImage(
-                                image: NetworkImage(documentSnapshot['image']),
-                                fit: BoxFit.cover,
+                          return InkWell(
+                            onTap: ()  {
+
+                              _launchUrl(documentSnapshot['location']);
+                            },
+                            child: Container(
+                              width: 500,
+                              height: 200,
+                              margin: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30.0),
+                                image: DecorationImage(
+                                  image: NetworkImage(documentSnapshot['image']),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      bookText(documentSnapshot['address'],
-                                          ColorResources.whiteF6F, 40),
-                                    ],
-                                  ),
-                                )
-                              ],
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        bookText(documentSnapshot['address'],
+                                            ColorResources.whiteF6F, 40),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         },
