@@ -182,335 +182,347 @@ class _ReportScreenState extends State<ReportScreen> {
       child: Scaffold(
         backgroundColor: ColorResources.whiteF6F,
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 350,
-                      child: Text(
-                          "بلغ عن المشكلة الأن وسيتم فريق محترف بالإهتمام بها",
-                          style: TextStyle(
-                              fontFamily: TextFontFamily.KHALED_FONT,
-                              fontSize: 18,
-                              color: ColorResources.black),
-                          maxLines: 2),
-                    ),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 350,
+                        child: Text(
+                            "بلغ عن المشكلة الأن وسيتم فريق محترف بالإهتمام بها",
+                            style: TextStyle(
+                                fontFamily: TextFontFamily.KHALED_FONT,
+                                fontSize: 18,
+                                color: ColorResources.black),
+                            maxLines: 2),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Stepper(
-                controlsBuilder: (context, details) => Row(
-                  children: [
-                    Container(
-                      width: 200,
-                      height: 35,
-                      child:  commonButton(() {
-                        if(_index>0){
-                          print('_index');
-                          print(_index);
-                          {
-                            getUserCurrentLocation().then((value) async {
-                              print(value.latitude.toString() +" "+value.longitude.toString());
-                              mylocations=value.latitude.toString() +" "+value.longitude.toString();
-                              print(mylocations);
+                Stepper(
+                  physics: ClampingScrollPhysics(),
+                  controlsBuilder: (context, details) => Row(
+                    children: [
 
-                              // marker added for current users location
-                              _markers.add(
-                                  Marker(
-                                    markerId: MarkerId("2"),
-                                    position: LatLng(value.latitude, value.longitude),
-                                    infoWindow: InfoWindow(
-                                      title: 'My Current Location',
-                                    ),
-                                  )
-                              );
+                      SingleChildScrollView(
+                        child: Container(
+                          width: 200,
+                          height: 35,
+                          child:  commonButton(() {
+                            if(_index>0){
+                              print('_index');
+                              print(_index);
+                              {
+                                getUserCurrentLocation().then((value) async {
+                                  print(value.latitude.toString() +" "+value.longitude.toString());
+                                  mylocations=value.latitude.toString() +" "+value.longitude.toString();
+                                  print(mylocations);
 
-                              // specified current users location
-                              CameraPosition cameraPosition = new CameraPosition(
-                                target: LatLng(value.latitude, value.longitude),
-                                zoom: 14,
-                              );
+                                  // marker added for current users location
+                                  _markers.add(
+                                      Marker(
+                                        markerId: MarkerId("2"),
+                                        position: LatLng(value.latitude, value.longitude),
+                                        infoWindow: InfoWindow(
+                                          title: 'My Current Location',
+                                        ),
+                                      )
+                                  );
 
-                              final GoogleMapController controller = await _controller.future;
-                              controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-                              addReporting(selectedLocation, NoteController.text, 1, null, mylocations,imageurl,dateSlug);
-                              QuickAlert.show(
-                                title: '',
-                                text:'تم إضافة النموذج بنجاح',
-                                confirmBtnText: 'موافق',
-                                onConfirmBtnTap: () => Get.to(HomePage()),
-                                context: context,
-                                type: QuickAlertType.success,
-                              );
+                                  // specified current users location
+                                  CameraPosition cameraPosition = new CameraPosition(
+                                    target: LatLng(value.latitude, value.longitude),
+                                    zoom: 14,
+                                  );
+
+                                  final GoogleMapController controller = await _controller.future;
+                                  controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+                                  addReporting(selectedLocation, NoteController.text, 1, null, mylocations,imageurl,dateSlug);
+                                  QuickAlert.show(
+                                    title: '',
+                                    text:'تم إضافة النموذج بنجاح',
+                                    confirmBtnText: 'موافق',
+                                    onConfirmBtnTap: () => Get.to(HomePage()),
+                                    context: context,
+                                    type: QuickAlertType.success,
+                                  );
+                                  setState(() {
+                                  });
+                                });
+                              }
+                            }
+
+
+                            if (_index <= 0) {
                               setState(() {
+                                _index += 1;
                               });
-                            });
-                          }
-                        }
+                            }
 
 
-                        if (_index <= 0) {
-                          setState(() {
-                            _index += 1;
-                          });
-                        }
+                          }, "التالي", Colors.orange, ColorResources.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                  currentStep: _index,
+                  onStepContinue: () {
 
+                    if (_index <= 0) {
+                      uploadFile();
+                      setState(() {
+                        _index += 1;
 
-                      }, "التالي", ColorResources.green129, ColorResources.white),
-                    ),
-                  ],
-                ),
-                currentStep: _index,
-                onStepContinue: () {
+                      });
 
-                  if (_index <= 0) {
-                    uploadFile();
+                    }
+                  },
+                  onStepTapped: (int index) {
+
                     setState(() {
-                      _index += 1;
-
+                      print(_index);
+                      _index = index;
                     });
-
-                  }
-                },
-                onStepTapped: (int index) {
-
-                  setState(() {
-                    print(_index);
-                    _index = index;
-                  });
-                },
-                steps: <Step>[
-                  Step(
-                    title: mediumText('تصوير البلاغ', ColorResources.black, 15),
-                    content: Column(
-                      children: [
-                        SizedBox(height: 20),
-                        Stack(
-                          alignment: Alignment.topCenter,
-                          clipBehavior: Clip.none,
+                  },
+                  steps: <Step>[
+                    Step(
+                      title: mediumText('تصوير البلاغ', ColorResources.black, 15),
+                      content: SingleChildScrollView(
+                        child: Column(
                           children: [
-                            Center(
-                              child: Container(
-                                height: 170,
-                                width: 170,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: ColorResources.greyEDE,
+                            SizedBox(height: 20),
+                            Stack(
+                              alignment: Alignment.topCenter,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Center(
+                                  child: Container(
+                                    height: 170,
+                                    width: 170,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: ColorResources.greyEDE,
+                                    ),
+                                    child: _photo == null
+                                        ? Center(
+                                            child: Container(
+                                            height: 200,
+                                            width: 500,
+                                            decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(Images.report),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ))
+
+                                        : ClipRRect(
+                                            borderRadius: BorderRadius.circular(30),
+                                            child: Image.file(
+                                              File.fromUri(
+                                                  Uri.parse(_photo!.path)),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                  ),
                                 ),
-                                child: _photo == null
-                                    ? Center(
-                                        child: Container(
-                                        height: 200,
-                                        width: 500,
-                                        decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(Images.report),
-                                            fit: BoxFit.cover,
+
+                                Positioned(
+                                  right: 80,
+                                  top: -10,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.bottomSheet(
+                                        Container(
+                                          height: 100,
+                                          width: Get.width,
+                                          color: ColorResources.white,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.symmetric(horizontal: 15),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        _getImageCamera();
+                                                        Get.back();
+                                                      },
+                                                      child: Icon(
+                                                        Icons.camera_alt_outlined,
+                                                        color:
+                                                            ColorResources.green009,
+                                                        size: 28,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "Camera",
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: ColorResources.black,
+                                                        fontFamily: TextFontFamily
+                                                            .AVENIR_LT_PRO_BOOK,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: 80,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        _getImageGallery();
+                                                        Get.back();
+
+                                                      },
+                                                      child: Icon(
+                                                        Icons.image_outlined,
+                                                        color:
+                                                            ColorResources.green009,
+                                                        size: 28,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "Gallery",
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: ColorResources.black,
+                                                        fontFamily: TextFontFamily
+                                                            .AVENIR_LT_PRO_BOOK,
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ))
-
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Image.file(
-                                          File.fromUri(
-                                              Uri.parse(_photo!.path)),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                              ),
-                            ),
-
-                            Positioned(
-                              right: 80,
-                              top: -10,
-                              child: InkWell(
-                                onTap: () {
-                                  Get.bottomSheet(
-                                    Container(
-                                      height: 100,
-                                      width: Get.width,
-                                      color: ColorResources.white,
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(horizontal: 15),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    _getImageCamera();
-                                                    Get.back();
-                                                  },
-                                                  child: Icon(
-                                                    Icons.camera_alt_outlined,
-                                                    color:
-                                                        ColorResources.green009,
-                                                    size: 28,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Camera",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: ColorResources.black,
-                                                    fontFamily: TextFontFamily
-                                                        .AVENIR_LT_PRO_BOOK,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 80,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    _getImageGallery();
-                                                    Get.back();
-
-                                                  },
-                                                  child: Icon(
-                                                    Icons.image_outlined,
-                                                    color:
-                                                        ColorResources.green009,
-                                                    size: 28,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Gallery",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: ColorResources.black,
-                                                    fontFamily: TextFontFamily
-                                                        .AVENIR_LT_PRO_BOOK,
-                                                  ),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
+                                      );
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 20,
+                                      backgroundColor: ColorResources.green009,
+                                      child: SvgPicture.asset(Images.cameraImage),
                                     ),
-                                  );
-                                },
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: ColorResources.green009,
-                                  child: SvgPicture.asset(Images.cameraImage),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
+                            SizedBox(height: 50),
+                            Container(
+                                child: mediumText(
+                                    'الرجاء رفع أو تصوير صورة تكون واضحة على المشكلة',
+                                    ColorResources.grey9AA,
+                                    15)),
+                            SizedBox(height: 20),
                           ],
                         ),
-                        SizedBox(height: 20),
-                        Container(
-                            child: mediumText(
-                                'الرجاء رفع أو تصوير صورة تكون واضحة على المشكلة',
-                                ColorResources.grey9AA,
-                                15)),
-                      ],
+                      ),
                     ),
-                  ),
-                   Step(
-                    title: Text('إدخال تفاصيل المشكلة'),
-                    content: Column(
-                      children: [
-                        Container(
+                     Step(
+                      title: Text('إدخال تفاصيل المشكلة'),
+                      content: Column(
+                        children: [
+                          Container(
 
-                          child:  Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              mediumText('نوع المخالفة', ColorResources.black4A4, 16),
-                              DropdownButton<String>(
-                                hint: bookText(selectedLocation,ColorResources.black4A4,16),
-
-
-                                items: _listDrugs.map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: mediumText(value,ColorResources.black4A4,16),
-                                  );
-                                }).toList(),
-
-                                onChanged: (newVal) {
-
-                                  selectedLocation=newVal!;
-                                  print(newVal);
-
-                                  this.setState(() {
+                            child:  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                mediumText('نوع المخالفة', ColorResources.black4A4, 16),
+                                DropdownButton<String>(
+                                  hint: bookText(selectedLocation,ColorResources.black4A4,16),
 
 
+                                  items: _listDrugs.map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: mediumText(value,ColorResources.black4A4,16),
+                                    );
+                                  }).toList(),
 
-                                  });
+                                  onChanged: (newVal) {
+
+                                    selectedLocation=newVal!;
+                                    print(newVal);
+
+                                    this.setState(() {
+
+
+
+                                    });
+                                  },
+                                ),
+
+
+
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: 500,
+                            height: 200,
+                            child: SafeArea(
+                              // on below line creating google maps
+                              child: GoogleMap(
+                                // on below line setting camera position
+                                initialCameraPosition: _kGoogle,
+                                // on below line we are setting markers on the map
+                                markers: Set<Marker>.of(_markers),
+                                // on below line specifying map type.
+                                mapType: MapType.normal,
+                                // on below line setting user location enabled.
+                                myLocationEnabled: true,
+                                // on below line setting compass enabled.
+                                compassEnabled: true,
+                                // on below line specifying controller on map complete.
+                                onMapCreated: (GoogleMapController controller){
+                                  _controller.complete(controller);
                                 },
                               ),
-
-
-
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: 500,
-                          height: 200,
-                          child: SafeArea(
-                            // on below line creating google maps
-                            child: GoogleMap(
-                              // on below line setting camera position
-                              initialCameraPosition: _kGoogle,
-                              // on below line we are setting markers on the map
-                              markers: Set<Marker>.of(_markers),
-                              // on below line specifying map type.
-                              mapType: MapType.normal,
-                              // on below line setting user location enabled.
-                              myLocationEnabled: true,
-                              // on below line setting compass enabled.
-                              compassEnabled: true,
-                              // on below line specifying controller on map complete.
-                              onMapCreated: (GoogleMapController controller){
-                                _controller.complete(controller);
-                              },
                             ),
                           ),
-                        ),
-                        SizedBox(height: 20,),
-                        Container(
-                          child: TextField(
-                            controller: NoteController,
-                            decoration: InputDecoration(
-                              hintText: 'ملاحظات',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(width: 3, color: Colors.greenAccent), //<-- SEE HERE
-                                borderRadius: BorderRadius.circular(50.0),
+                          SizedBox(height: 20,),
+                          Container(
+                            child: TextField(
+                              controller: NoteController,
+                              decoration: InputDecoration(
+                                hintText: 'ملاحظات',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(width: 3, color: Colors.orangeAccent), //<-- SEE HERE
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
                               ),
-                            ),
 
-                          )
-                        )
-
-
+                            )
+                          ),
+                          SizedBox(height: 20,),
 
 
-                      ],
 
+
+                        ],
+
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                SizedBox(height: 20,),
+              ],
+            ),
           ),
         ),
 

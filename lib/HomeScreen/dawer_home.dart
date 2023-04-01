@@ -44,16 +44,72 @@ class _DawerHomeState extends State<DawerHome> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
 
-                  )
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  mediumText("مايحدث الأن", ColorResources.black, 16),
+
                 ],
               ),
             ),
+            Container(
+              width: double.infinity,
+              height: 250,
+              child: StreamBuilder(
+                stream: advertisement.snapshots(), //build connection
+                builder:
+                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  if (streamSnapshot.hasData) {
+                    return ListView.builder(
+                      itemCount:
+                      streamSnapshot.data!.docs.length, //number of rows
+                      itemBuilder: (context, index) {
+                        final DocumentSnapshot documentSnapshot =
+                        streamSnapshot.data!.docs[index];
+                        return Container(
+                          width: 500,
+                          height: 200,
+                          margin: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            image: DecorationImage(
+                              image: NetworkImage(documentSnapshot['image']),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }
+
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            ),
+            Divider(),
             StreamBuilder(
                 stream: ads.snapshots(),
                 builder:
@@ -155,57 +211,7 @@ class _DawerHomeState extends State<DawerHome> {
             ),
              */
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  mediumText("مايحدث الأن", ColorResources.black, 16),
 
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              height: 250,
-              child: StreamBuilder(
-                stream: advertisement.snapshots(), //build connection
-                builder:
-                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                  if (streamSnapshot.hasData) {
-                    return ListView.builder(
-                      itemCount:
-                      streamSnapshot.data!.docs.length, //number of rows
-                      itemBuilder: (context, index) {
-                        final DocumentSnapshot documentSnapshot =
-                        streamSnapshot.data!.docs[index];
-                        return Container(
-                          width: 500,
-                          height: 200,
-                          margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            image: DecorationImage(
-                              image: NetworkImage(documentSnapshot['image']),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  }
-
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ),
 
           ],
         ),

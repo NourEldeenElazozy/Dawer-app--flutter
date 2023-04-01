@@ -76,7 +76,7 @@ class _TasksReportsState extends State<TasksReports> {
                    .snapshots(),
 
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                if(streamSnapshot.data?.size != 1){
+                if(streamSnapshot.data?.size == 0){
                   return const Center(
                     child: CircularProgressIndicator(),
                   );

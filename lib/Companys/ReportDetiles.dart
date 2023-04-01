@@ -6,6 +6,7 @@ import 'package:dawerf/Utiils/text_font_family.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 UpdateCompany(){
 print(ReportDet.documentID);
   FirebaseFirestore.instance
@@ -23,7 +24,15 @@ class ReportDetails extends StatefulWidget {
   @override
   State<ReportDetails> createState() => _ReportDetailsState();
 }
+
 class _ReportDetailsState extends State<ReportDetails> {
+  Future<void> _launchUrl(String location) async {
+    final Uri url = Uri.parse('https://www.google.com/maps/@$location');
+    print(url);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
   @override
   Widget build(BuildContext context) {
    return Directionality(
@@ -92,11 +101,17 @@ class _ReportDetailsState extends State<ReportDetails> {
                  children: [
                    Column(
                      children: [
-                        Image(
-                         image: AssetImage('assets/images/map.png'),
-                         width: 50,
-                         height: 50.0,
+                        InkWell(
+                          onTap: () {
+                            _launchUrl(ReportDet.location.toString());
+
+                          },
+                          child: Image(
+                           image: AssetImage('assets/images/map.png'),
+                           width: 50,
+                           height: 50.0,
                        ),
+                        ),
                        mediumText( 'اضفط لعرض الموقع على الخريطة',ColorResources.greyA0A, 15),
                      ],
                    ),
@@ -112,7 +127,7 @@ class _ReportDetailsState extends State<ReportDetails> {
 
                      color: ColorResources.custom,
                      onPressed: (){
-                       Get.to(HomePageCompany());
+
                        SnackBar snackBar;
                        UpdateCompany().then(
                         snackBar = SnackBar(

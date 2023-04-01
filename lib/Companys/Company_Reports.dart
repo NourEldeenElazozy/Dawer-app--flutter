@@ -48,7 +48,7 @@ Map<String, dynamic>? a;
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                 if (streamSnapshot.hasData) {
                   return ListView.builder(
-                    itemCount: 1,  //number of rows
+                    itemCount: streamSnapshot.data!.size,  //number of rows
                     itemBuilder: (context, index) {
                       final DocumentSnapshot documentSnapshot =
                       streamSnapshot.data!.docs[index];

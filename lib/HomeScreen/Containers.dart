@@ -33,6 +33,7 @@ class _ContainersState extends State<Containers> {
        child: Padding(
           padding: const EdgeInsets.all(20.0),
           child:Column(
+
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -67,6 +68,7 @@ class _ContainersState extends State<Containers> {
                       (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                     if (streamSnapshot.hasData) {
                       return ListView.builder(
+
                         itemCount:
                         streamSnapshot.data!.docs.length, //number of rows
                         itemBuilder: (context, index) {
@@ -77,31 +79,57 @@ class _ContainersState extends State<Containers> {
 
                               _launchUrl(documentSnapshot['location']);
                             },
-                            child: Container(
-                              width: 500,
-                              height: 200,
-                              margin: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30.0),
-                                image: DecorationImage(
-                                  image: NetworkImage(documentSnapshot['image']),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        bookText(documentSnapshot['address'],
-                                            ColorResources.whiteF6F, 40),
-                                      ],
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: Card(
+                                      elevation: 10,
+                                      color: Theme.of(context).colorScheme.surfaceVariant,
+                                      child:  SizedBox(
+                                        width: 350,
+                                        height: 100,
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding:  EdgeInsets.all(10.0),
+                                                child: Row(
+
+                                                  children: [
+                                                  Center(
+                                                    child:   mediumText(documentSnapshot['address'],
+                                                        ColorResources.black4A4, 25),
+                                                  )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 150,
+                                                height: 200,
+                                                margin: EdgeInsets.all(0.0),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(0.0),
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(documentSnapshot['image']),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+
+                                              ),
+
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
+                                  ),
+                                ),
+
+
+                              ],
                             ),
                           );
                         },

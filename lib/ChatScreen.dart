@@ -54,14 +54,15 @@ class _messagesState extends State<messages> {
       child: StreamBuilder(
         stream: _messageStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text("something is wrong");
-          }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
+          if (snapshot.hasError) {
+            return Text("حدث خطاء ما");
+          }
+
 
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
