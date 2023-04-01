@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:dawerf/HomeScreen/dawer_home.dart';
+import 'package:dawerf/menu.dart';
 import 'package:intl/intl.dart' as a ;
 import 'package:dawerf/Controller/location_controller.dart';
 import 'package:dawerf/HomePage.dart';
@@ -246,7 +248,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                     title: '',
                                     text:'تم إضافة النموذج بنجاح',
                                     confirmBtnText: 'موافق',
-                                    onConfirmBtnTap: () => Get.to(HomePage()),
+                                    onConfirmBtnTap: () => Get.back(),
                                     context: context,
                                     type: QuickAlertType.success,
                                   );
