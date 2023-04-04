@@ -62,7 +62,7 @@ mainAxisAlignment: MainAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
 
                                   children:  [
-                                    mediumText(timeago.format(documentSnapshot['date'].toDate()), ColorResources.grey777, 25),
+                                    mediumText(documentSnapshot['date'], ColorResources.grey777, 25),
 
 
 
