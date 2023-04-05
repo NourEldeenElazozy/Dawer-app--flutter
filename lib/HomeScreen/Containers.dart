@@ -85,6 +85,7 @@ class _ContainersState extends State<Containers> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 20),
                                     child: Card(
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                       elevation: 10,
                                       color: Theme.of(context).colorScheme.surfaceVariant,
                                       child:  SizedBox(
@@ -101,7 +102,7 @@ class _ContainersState extends State<Containers> {
                                                   children: [
                                                   Center(
                                                     child:   mediumText(documentSnapshot['address'],
-                                                        ColorResources.black4A4, 25),
+                                                        ColorResources.black4A4, 20),
                                                   )
                                                   ],
                                                 ),

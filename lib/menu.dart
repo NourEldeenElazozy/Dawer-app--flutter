@@ -34,13 +34,13 @@ class BottomNavBar extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.home),
           title: ("الرئيسية"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.orange,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.location_on),
           title: ("الحاويات"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.orange,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
@@ -51,13 +51,13 @@ class BottomNavBar extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.notifications),
           title: ("الإشعارات"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.orange,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.person),
           title: ("حسابي"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.orange,
           inactiveColorPrimary: Colors.grey,
         ),
       ];

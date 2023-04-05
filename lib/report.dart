@@ -35,6 +35,7 @@ class _ReportScreenState extends State<ReportScreen> {
   var mylocations;
   Completer<GoogleMapController> _controller = Completer();
 // on below line we have specified camera position
+// camera code 
   static const CameraPosition _kGoogle = CameraPosition(
     target: LatLng(20.42796133580664, 80.885749655962),
     zoom: 14.4746,
@@ -71,19 +72,19 @@ class _ReportScreenState extends State<ReportScreen> {
 
 
   Future<void> addReporting(typeReport,description,companyStatus,companyId,location,image,dateAdded) {
-    // Call the user's CollectionReference to add a new user
+    // Call the user's CollectionReference to add a new Report
     return report
         .add({
-      'typeReport': typeReport, // John Doe
+      'typeReport': typeReport, // مخلفات, مطبات, 
       'description': description, // Stokes and Sons
-      'companyStatus': companyStatus,
-      'companyId': companyId,
+      'companyStatus': companyStatus, // حالة قبول الشركة    (0 accepted , 1 awaiting, 2 rejected)
+      'companyId': companyId,//رقم الشركة المخولة 
       'location': location,
       'images': image,
       'dateAdded': dateAdded,
     })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .then((value) => print("Report Added"))
+        .catchError((error) => print("Failed to add Report: $error"));
   }
   String selectedLocation = '';
   List<String> _listDrugs= [];
@@ -362,7 +363,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                                       child: Icon(
                                                         Icons.camera_alt_outlined,
                                                         color:
-                                                            ColorResources.green009,
+                                                            Colors.orange,
                                                         size: 28,
                                                       ),
                                                     ),
@@ -393,7 +394,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                                       child: Icon(
                                                         Icons.image_outlined,
                                                         color:
-                                                            ColorResources.green009,
+                                                            Colors.orange,
                                                         size: 28,
                                                       ),
                                                     ),
@@ -416,7 +417,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                     },
                                     child: CircleAvatar(
                                       radius: 20,
-                                      backgroundColor: ColorResources.green009,
+                                      backgroundColor: Colors.orange,
                                       child: SvgPicture.asset(Images.cameraImage),
                                     ),
                                   ),

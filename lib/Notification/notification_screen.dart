@@ -27,54 +27,117 @@ class NotificationScreen extends StatelessWidget {
                       streamSnapshot.data!.docs[index];
                       return Row(
 mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-
-                          Container(
-                            width: 350,
-                            height: 120,
-
-                            margin: const EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.indigo.withOpacity(0.4),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: const Offset(0, 3), // changes position of shadow
-                                  ),
-                                ],
-                              color: ColorResources.whiteF6F
-
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+             
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
+                                Container(
+                                                width: 80,
+                                                height: 80,
+                                                margin: EdgeInsets.all(0.0),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(0.0),
+                                                  image: DecorationImage(
+                                                    image: AssetImage('assets/images/logo.png'),
 
-                                    mediumText(
-                                        documentSnapshot['title'], ColorResources.custom, 25),
-                                  ],),
-                                Row(
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
 
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                              ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: Card(
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                      color: Theme.of(context).colorScheme.surfaceVariant,
+                                      child:  SizedBox(
+                                        width: 350,
+                                        height: 100,
+                                        
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding:  EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  children: [
+                                                    
+                                                    Row(
+                                                      children: [
+                                                      
+                                                           mediumText(documentSnapshot['title'], ColorResources.custom, 18),
+                                                      
+                                                      ],
+                                                    ),
+                                                    Row(
 
-                                  children:  [
-                                    mediumText(timeago.format(documentSnapshot['date'].toDate()), ColorResources.grey777, 25),
+                                                      children: [
+                                                      
+                                                           mediumText(timeago.format(documentSnapshot['date'].toDate()), ColorResources.grey777, 15),
+                                                      
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              
 
-
-
-                                  ],
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
 
 
-                              ],
+                          // Container(
+                          //   width: 350,
+                          //   height: 120,
+
+                          //   margin: const EdgeInsets.all(10.0),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(30.0),
+                          //       boxShadow: [
+                          //         BoxShadow(
+                          //           color: Colors.indigo.withOpacity(0.4),
+                          //           spreadRadius: 5,
+                          //           blurRadius: 7,
+                          //           offset: const Offset(0, 3), // changes position of shadow
+                          //         ),
+                          //       ],
+                          //     color: ColorResources.whiteF6F
+
+                          //   ),
+                          //   child: Column(
+                          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //     children: [
+                          //       Row(
+                          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //         children: [
+
+                          //           mediumText(
+                          //               documentSnapshot['title'], ColorResources.custom, 25),
+                          //         ],),
+                          //       Row(
+
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+
+                          //         children:  [
+                          //           mediumText(timeago.format(documentSnapshot['date'].toDate()), ColorResources.grey777, 25),
 
 
-                            ),
-                          ),
+
+                          //         ],
+                          //       ),
+
+
+                          //     ],
+
+
+                          //   ),
+                          // ),
                         ],
                       );
                     },
