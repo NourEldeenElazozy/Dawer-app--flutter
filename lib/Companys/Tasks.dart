@@ -129,8 +129,7 @@ class _TasksReportsState extends State<TasksReports> {
 
                         },
                         child: Container(
-                          width: 450,
-                          height: 180,
+
 
                           margin: EdgeInsets.all(12.0),
                           decoration: BoxDecoration(
