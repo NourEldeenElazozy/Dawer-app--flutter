@@ -123,6 +123,7 @@ class _DawerHomeState extends State<DawerHome> {
                         child: CarouselSlider.builder(
                           itemCount: streamSnapshot.data!.docs.length,
                           options: CarouselOptions(
+
                             scrollDirection: Axis.vertical,
                             aspectRatio: 2.0,
                             enlargeCenterPage: true,
