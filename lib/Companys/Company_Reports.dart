@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
 class CompanyReports extends StatelessWidget {
   CompanyReports({Key? key}) : super(key: key);
-  final CollectionReference reporting =
-  FirebaseFirestore.instance.collection('reporting-service');
+
+
   @override
   Widget build(BuildContext context) {
 Map<String, dynamic>? a;
@@ -44,14 +44,33 @@ Map<String, dynamic>? a;
         children: [
           Flexible(
             child: StreamBuilder(
-              stream: reporting.snapshots(), //build connection
+              stream:
+              FirebaseFirestore.instance.
+              collection('reporting-service').
+              where("companyId", isEqualTo: User.documentID).
+              where("companyStatus", isEqualTo: 1)
+
+                  .snapshots(), //build connection
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                if (streamSnapshot.hasData) {
+                if(streamSnapshot.data?.size == 0){
+                  return  Center(
+                    child: mediumText("لا يوجد عمليات تم قبولها", Colors.red, 20),
+                  );
+                }
+                 if (streamSnapshot.hasData) {
                   return ListView.builder(
                     itemCount: streamSnapshot.data!.size,  //number of rows
                     itemBuilder: (context, index) {
+
                       final DocumentSnapshot documentSnapshot =
                       streamSnapshot.data!.docs[index];
+                      if(streamSnapshot.data?.size == 0){
+                        return  Center(
+                          child: mediumText("لا يوجد عمليات تم قبولها", Colors.red, 20),
+                        );
+                      }else{
+
+                      }
                       return InkWell(
                         onTap: (){
                           print(ReportDet.image);
