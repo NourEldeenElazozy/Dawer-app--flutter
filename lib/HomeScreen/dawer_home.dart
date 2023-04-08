@@ -59,108 +59,50 @@ class _DawerHomeState extends State<DawerHome> {
                 ),
               ),
             ),
-            StreamBuilder(
-                stream: ads.snapshots(),
-                builder:
-                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                  if (streamSnapshot.hasData) {
-                    return Container(
-                        child: CarouselSlider.builder(
-                      itemCount: streamSnapshot.data!.docs.length,
-                      options: CarouselOptions(
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                      ),
-                      itemBuilder: (ctx, index, realIdx) {
-                        final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[index];
-                        return InkWell(
-                          onTap: () {
-                            Get.to(NewsPage(documentSnapshot['title'],documentSnapshot['description'],documentSnapshot['image']));
-                          },
-                          child: Container(
-                            width: 500,
-                            margin: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      documentSnapshot['image'].toString()),
-                                  fit: BoxFit.cover),
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    mediumText(documentSnapshot['title'],
-                                        ColorResources.black, 25),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    mediumText(documentSnapshot['description'],
-                                        ColorResources.black, 20),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ));
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }),
-            SizedBox(
-              height: 15,
-            ),
-            Divider(),
+
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  mediumText(" أخر الأخبار", ColorResources.black, 16),
+                  mediumText("مايحدث الأن", ColorResources.black, 16),
 
                 ],
               ),
             ),
             Container(
               width: double.infinity,
-              height: 250,
+
               child: StreamBuilder(
                 stream: advertisement.snapshots(), //build connection
                 builder:
                     (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                   if (streamSnapshot.hasData) {
-                    return ListView.builder(
-                      itemCount:
-                      streamSnapshot.data!.docs.length, //number of rows
-                      itemBuilder: (context, index) {
-                        final DocumentSnapshot documentSnapshot =
-                        streamSnapshot.data!.docs[index];
-                        return Container(
-                          width: 500,
-                          height: 200,
-                          margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            image: DecorationImage(
-                              image: NetworkImage(documentSnapshot['image']),
-                              fit: BoxFit.cover,
-                            ),
+                    return Container(
+                        child: CarouselSlider.builder(
+                          itemCount: streamSnapshot.data!.docs.length,
+                          options: CarouselOptions(
+                            aspectRatio: 2.0,
+                            enlargeCenterPage: true,
+                            autoPlay: true,
                           ),
-                          child: Column(
-                            children: [
+                          itemBuilder: (ctx, index, realIdx) {
+                            final DocumentSnapshot documentSnapshot =
+                            streamSnapshot.data!.docs[index];
+                            return Container(
+                              width: 500,
+                              margin: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        documentSnapshot['image'].toString()),
+                                    fit: BoxFit.cover),
+                              ),
 
-                            ],
-                          ),
-                        );
-                      },
-                    );
+                            );
+                          },
+                        ));
                   }
 
                   return const Center(
@@ -169,7 +111,71 @@ class _DawerHomeState extends State<DawerHome> {
                 },
               ),
             ),
-            
+            SizedBox(height: 50,),
+            StreamBuilder(
+                stream: ads.snapshots(),
+                builder:
+                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  if (streamSnapshot.hasData) {
+                    return Container(
+                      height: 350,
+                        width: 400,
+                        child: CarouselSlider.builder(
+                          itemCount: streamSnapshot.data!.docs.length,
+                          options: CarouselOptions(
+
+                            scrollDirection: Axis.vertical,
+                            aspectRatio: 2.0,
+                            enlargeCenterPage: true,
+                            autoPlay: true,
+                          ),
+                          itemBuilder: (ctx, index, realIdx) {
+                            final DocumentSnapshot documentSnapshot =
+                            streamSnapshot.data!.docs[index];
+                            return InkWell(
+                              onTap: () {
+                                Get.to(NewsPage(documentSnapshot['title'],documentSnapshot['description'],documentSnapshot['image']));
+                              },
+                              child: Container(
+                                width: 500,
+
+
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          documentSnapshot['image'].toString()),
+                                      fit: BoxFit.cover),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        mediumText(documentSnapshot['title'],
+                                            ColorResources.black, 25),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        mediumText(documentSnapshot['description'],
+                                            ColorResources.black, 20),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ));
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
+            SizedBox(
+              height: 15,
+            ),
             /*
                Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

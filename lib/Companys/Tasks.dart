@@ -13,7 +13,34 @@ class TasksReports extends StatefulWidget {
   @override
   State<TasksReports> createState() => _TasksReportsState();
 }
-
+UpdateCompany(){
+  print(ReportDet.documentID);
+  FirebaseFirestore.instance
+      .collection('reporting-service')
+      .doc(ReportDet.documentID)
+      .update({
+    //"companyId":User.documentID,
+    "companyStatus":3
+  }).then((result){
+    print("new USer true");
+  }).catchError((onError){
+    print("onError");
+  });
+}
+UpdateRemoveCompany(){
+  print(ReportDet.documentID);
+  FirebaseFirestore.instance
+      .collection('reporting-service')
+      .doc(ReportDet.documentID)
+      .update({
+    "companyId":null,
+    "companyStatus":0
+  }).then((result){
+    print("new USer true");
+  }).catchError((onError){
+    print("onError");
+  });
+}
 class _TasksReportsState extends State<TasksReports> {
   Map<String, dynamic>? a;
   final CollectionReference reporting =
@@ -72,13 +99,13 @@ class _TasksReportsState extends State<TasksReports> {
             stream:
                FirebaseFirestore.instance.
                    collection('reporting-service').
-                where("companyId", isEqualTo: User.documentID)
+                where("companyId", isEqualTo: User.documentID). where("companyStatus", isEqualTo: 0)
                    .snapshots(),
 
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                 if(streamSnapshot.data?.size == 0){
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return  Center(
+                    child: mediumText("لا يوجد عمليات تم قبولها", Colors.red, 20),
                   );
                 }
                 if (streamSnapshot.hasData) {
@@ -102,8 +129,7 @@ class _TasksReportsState extends State<TasksReports> {
 
                         },
                         child: Container(
-                          width: 450,
-                          height: 180,
+
 
                           margin: EdgeInsets.all(12.0),
                           decoration: BoxDecoration(
@@ -227,6 +253,32 @@ class _alertDialogState extends State<alertDialog2> {
 
                           color: ColorResources.custom,
                           onPressed: (){
+                            Get.back();
+
+
+                              SnackBar snackBar;
+                              UpdateCompany().then(
+                                  snackBar = SnackBar(
+                                    content: mediumText(
+                                        'تم انهاء العملية بنجاح',
+                                        ColorResources.whiteF6F,
+                                        14),
+                                    backgroundColor: (Colors.green),
+                                    action: SnackBarAction(
+                                      label: 'موافق',
+                                      onPressed: () {
+
+                                      },
+                                    ),
+                                  ),
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar)
+                              );
+                              setState(() {
+
+                              });
+
+
                           },
                           child:mediumText('تمت العملية',ColorResources.whiteF6F,14),
                         ),
@@ -239,6 +291,32 @@ class _alertDialogState extends State<alertDialog2> {
 
                           color: ColorResources.redF22,
                           onPressed: (){
+                            Get.back();
+
+
+                            SnackBar snackBar;
+                            UpdateRemoveCompany().then(
+                                snackBar = SnackBar(
+                                  content: mediumText(
+                                      'تم حذف العملية بنجاح',
+                                      ColorResources.whiteF6F,
+                                      14),
+                                  backgroundColor: (Colors.green),
+                                  action: SnackBarAction(
+                                    label: 'موافق',
+                                    onPressed: () {
+
+                                    },
+                                  ),
+                                ),
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar)
+                            );
+                            setState(() {
+
+                            });
+
+
                           },
                           child:mediumText('حذف العملية',ColorResources.white,14),
                         ),

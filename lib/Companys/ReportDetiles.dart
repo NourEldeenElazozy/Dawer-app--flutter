@@ -13,7 +13,22 @@ print(ReportDet.documentID);
       .collection('reporting-service')
       .doc(ReportDet.documentID)
       .update({
-    "companyId":User.documentID
+    //"companyId":User.documentID,
+    "companyStatus":0
+  }).then((result){
+    print("new USer true");
+  }).catchError((onError){
+    print("onError");
+  });
+}
+UpdateCancelCompany(){
+  print(ReportDet.documentID);
+  FirebaseFirestore.instance
+      .collection('reporting-service')
+      .doc(ReportDet.documentID)
+      .update({
+    //"companyId":User.documentID,
+    "companyStatus":1
   }).then((result){
     print("new USer true");
   }).catchError((onError){
@@ -151,12 +166,30 @@ class _ReportDetailsState extends State<ReportDetails> {
                      child:mediumText('قبول العملية',ColorResources.whiteF6F,18),
                    ),
                    MaterialButton(
-
-                     color: ColorResources.redF22,
                      onPressed: (){
 
+                       SnackBar snackBar;
+                       UpdateCancelCompany().then(
+                           snackBar = SnackBar(
+                             content: mediumText(
+                                 'تم رفض العملية بنجاح',
+                                 ColorResources.whiteF6F,
+                                 14),
+                             backgroundColor: (Colors.red),
+                             action: SnackBarAction(
+                               label: 'موافق',
+                               onPressed: () {
+
+                               },
+                             ),
+                           ),
+                           ScaffoldMessenger.of(context)
+                               .showSnackBar(snackBar)
+                       );
 
                      },
+                     color: ColorResources.redF22,
+
                      child:mediumText('رفض',ColorResources.whiteF6F,18),
                    ),
                  ],
