@@ -71,6 +71,8 @@ class _ReportScreenState extends State<ReportScreen> {
   CollectionReference report = FirebaseFirestore.instance.collection('reporting-service');
 
 
+  CollectionReference notifications = FirebaseFirestore.instance.collection('notifications');
+
   Future<void> addReporting(typeReport,description,companyStatus,companyId,location,image,dateAdded) {
     // Call the user's CollectionReference to add a new Report
     return report
@@ -83,8 +85,19 @@ class _ReportScreenState extends State<ReportScreen> {
       'images': image,
       'dateAdded': dateAdded,
     })
-        .then((value) => print("Report Added"))
-        .catchError((error) => print("Failed to add Report: $error"));
+        .then((value) => print("Report Added $value"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+  Future<void> Addnotifications(date,title) {
+    // Call the user's CollectionReference to add a new user
+    return notifications
+        .add({
+      'title': title,
+
+      'date': date,
+    })
+        .then((value) => print("Report Added $value"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
   String selectedLocation = '';
   List<String> _listDrugs= [];
@@ -244,7 +257,9 @@ class _ReportScreenState extends State<ReportScreen> {
 
                                   final GoogleMapController controller = await _controller.future;
                                   controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-                                  addReporting(selectedLocation, NoteController.text, 1, null, mylocations,imageurl,dateSlug);
+                                  addReporting(selectedLocation, NoteController.text, 1, null, mylocations,imageurl,dateSlug).then((value) {
+                                    Addnotifications(dateSlug,NoteController.text) ;
+                                  });
                                   QuickAlert.show(
                                     title: '',
                                     text:'تم إضافة النموذج بنجاح',

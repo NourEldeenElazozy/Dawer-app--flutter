@@ -82,6 +82,8 @@ mainAxisAlignment: MainAxisAlignment.center,
                                                 ),
                                               ),
                                               
+                                  // children:  [
+                                  //   mediumText(documentSnapshot['date'], ColorResources.grey777, 25),
 
                                             ],
                                           ),

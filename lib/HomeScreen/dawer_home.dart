@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dawerf/NewsPage.dart';
 import 'package:dawerf/Profile/Profile.dart';
 
 import 'package:dawerf/Utiils/colors.dart';
@@ -74,31 +75,36 @@ class _DawerHomeState extends State<DawerHome> {
                       itemBuilder: (ctx, index, realIdx) {
                         final DocumentSnapshot documentSnapshot =
                             streamSnapshot.data!.docs[index];
-                        return Container(
-                          width: 500,
-                          margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    documentSnapshot['image'].toString()),
-                                fit: BoxFit.cover),
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  mediumText(documentSnapshot['title'],
-                                      ColorResources.black, 25),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  mediumText(documentSnapshot['description'],
-                                      ColorResources.black, 20),
-                                ],
-                              ),
-                            ],
+                        return InkWell(
+                          onTap: () {
+                            Get.to(NewsPage(documentSnapshot['title'],documentSnapshot['description'],documentSnapshot['image']));
+                          },
+                          child: Container(
+                            width: 500,
+                            margin: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      documentSnapshot['image'].toString()),
+                                  fit: BoxFit.cover),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    mediumText(documentSnapshot['title'],
+                                        ColorResources.black, 25),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    mediumText(documentSnapshot['description'],
+                                        ColorResources.black, 20),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
