@@ -76,13 +76,17 @@ class _ReportScreenState extends State<ReportScreen> {
     // Call the user's CollectionReference to add a new user
     return report
         .add({
-      'typeReport': typeReport, // John Doe
-      'description': description, // Stokes and Sons
+      'typeReport': typeReport,
+      'description': description,
       'companyStatus': companyStatus,
       'companyId': companyId,
       'location': location,
       'images': image,
       'dateAdded': dateAdded,
+      'assignedCompany': "null",
+      'favorite': false,
+
+
     })
         .then((value) => print("Report Added $value"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -256,7 +260,7 @@ class _ReportScreenState extends State<ReportScreen> {
 
                                   final GoogleMapController controller = await _controller.future;
                                   controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-                                  addReporting(selectedLocation, NoteController.text, 1, null, mylocations,imageurl,dateSlug).then((value) {
+                                  addReporting(selectedLocation.substring(1,selectedLocation.length-1), NoteController.text, 1, null, mylocations,imageurl,dateSlug).then((value) {
                                     Addnotifications(dateSlug,NoteController.text) ;
                                   });
                                   QuickAlert.show(
@@ -463,7 +467,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   hint: bookText(selectedLocation,ColorResources.black4A4,16),
 
 
-                                  items: _listDrugs.map((String value) {
+                                  items: _listDrugs.map((String value)  {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: mediumText(value,ColorResources.black4A4,16),
@@ -473,7 +477,9 @@ class _ReportScreenState extends State<ReportScreen> {
                                   onChanged: (newVal) {
 
                                     selectedLocation=newVal!;
-                                    print(newVal);
+
+
+
 
                                     this.setState(() {
 

@@ -66,7 +66,6 @@ class _DawerHomeState extends State<DawerHome> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   mediumText("مايحدث الأن", ColorResources.black, 16),
-
                 ],
               ),
             ),
@@ -114,8 +113,7 @@ class _DawerHomeState extends State<DawerHome> {
             SizedBox(height: 50,),
             StreamBuilder(
                 stream: ads.snapshots(),
-                builder:
-                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                   if (streamSnapshot.hasData) {
                     return Container(
                       height: 350,
@@ -123,7 +121,6 @@ class _DawerHomeState extends State<DawerHome> {
                         child: CarouselSlider.builder(
                           itemCount: streamSnapshot.data!.docs.length,
                           options: CarouselOptions(
-
                             scrollDirection: Axis.vertical,
                             aspectRatio: 2.0,
                             enlargeCenterPage: true,
