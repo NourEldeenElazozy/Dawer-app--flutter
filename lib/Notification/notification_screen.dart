@@ -72,75 +72,24 @@ mainAxisAlignment: MainAxisAlignment.center,
                                                     ),
                                                     Row(
 
-                                                      children: [
-                                                      
-                                                           mediumText(timeago.format(documentSnapshot['date'].toDate()), ColorResources.grey777, 15),
-                                                      
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              
-                                  // children:  [
-                                  //   mediumText(documentSnapshot['date'], ColorResources.grey777, 25),
+                                  children:  [
+                                    mediumText(documentSnapshot['date'].toString(), ColorResources.grey777, 25),
 
                                             ],
                                           ),
+                                                  ],
                                         ),
                                       ),
+                                            ],
                                     ),
                                   ),
                                 ),
-
-
-                          // Container(
-                          //   width: 350,
-                          //   height: 120,
-
-                          //   margin: const EdgeInsets.all(10.0),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(30.0),
-                          //       boxShadow: [
-                          //         BoxShadow(
-                          //           color: Colors.indigo.withOpacity(0.4),
-                          //           spreadRadius: 5,
-                          //           blurRadius: 7,
-                          //           offset: const Offset(0, 3), // changes position of shadow
-                          //         ),
-                          //       ],
-                          //     color: ColorResources.whiteF6F
-
-                          //   ),
-                          //   child: Column(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          //     children: [
-                          //       Row(
-                          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          //         children: [
-
-                          //           mediumText(
-                          //               documentSnapshot['title'], ColorResources.custom, 25),
-                          //         ],),
-                          //       Row(
-
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-
-                          //         children:  [
-                          //           mediumText(timeago.format(documentSnapshot['date'].toDate()), ColorResources.grey777, 25),
-
-
-
-                          //         ],
-                          //       ),
-
-
-                          //     ],
-
-
-                          //   ),
-                          // ),
+                           ),
+                                  
+                                  ),
+                                ),  
                         ],
+                      
                       );
                     },
                   );
