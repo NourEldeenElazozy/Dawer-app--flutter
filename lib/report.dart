@@ -50,6 +50,7 @@ class _ReportScreenState extends State<ReportScreen> {
     ),
   ];
   Future<Position> getUserCurrentLocation() async {
+    
     await Geolocator.requestPermission().then((value){
     }).onError((error, stackTrace) async {
       await Geolocator.requestPermission();
@@ -84,7 +85,7 @@ class _ReportScreenState extends State<ReportScreen> {
       'location': location,
       'images': image,
       'dateAdded': dateAdded,
-      'assignedCompany': "null",
+      'assignedCompany':null,
       'favorite': false,
 
 
@@ -268,11 +269,16 @@ class _ReportScreenState extends State<ReportScreen> {
                                     title: '',
                                     text:'تم إضافة النموذج بنجاح',
                                     confirmBtnText: 'موافق',
-                                    onConfirmBtnTap: () => Get.back(),
+                                    onConfirmBtnTap: () {
+                                    Get.to(DawerHome());            
+
+                                    },
                                     context: context,
                                     type: QuickAlertType.success,
+                                    
                                   );
                                   setState(() {
+                                    
                                   });
                                 });
                               }
@@ -501,6 +507,7 @@ class _ReportScreenState extends State<ReportScreen> {
                             child: SafeArea(
                               // on below line creating google maps
                               child: GoogleMap(
+                               myLocationEnabled: true,
                                 // on below line setting camera position
                                 initialCameraPosition: _kGoogle,
                                 // on below line we are setting markers on the map
@@ -508,7 +515,6 @@ class _ReportScreenState extends State<ReportScreen> {
                                 // on below line specifying map type.
                                 mapType: MapType.normal,
                                 // on below line setting user location enabled.
-                                myLocationEnabled: true,
                                 // on below line setting compass enabled.
                                 compassEnabled: true,
                                 // on below line specifying controller on map complete.

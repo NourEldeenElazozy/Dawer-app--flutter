@@ -77,7 +77,9 @@ class _ContainersState extends State<Containers> {
                           return InkWell(
                             onTap: ()  {
 
-                              _launchUrl(documentSnapshot['location']);
+                             // _launchUrl(documentSnapshot['location']);
+                             LaunchMap(documentSnapshot['location']);
+                             
                             },
                             child: Row(
                               children: [
@@ -148,5 +150,20 @@ class _ContainersState extends State<Containers> {
         ),
      ),
     );
+    
   }
+
+  Future<void> LaunchMap(documentSnapshot) async {
+   final String googleMapslocationUrl = "https://www.google.com/maps/search/?api=1&query=${documentSnapshot}";
+    final String encodedURl = Uri.encodeFull(googleMapslocationUrl);
+
+    if (await canLaunch(encodedURl)) {
+      await launch(encodedURl);
+    } else {
+      print('Could not launch $encodedURl');
+      throw 'Could not launch $encodedURl';
+    }
+  }
+  
+  
 }

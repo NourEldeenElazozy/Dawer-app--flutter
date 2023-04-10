@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
         .collection('users')
 
         .where("phone", isEqualTo: phone.toString())
-        .where("password", isEqualTo: pass.toString())
+        .where("pass", isEqualTo: pass.toString())
         .get()
         .then((event) {
       if (event.docs.isNotEmpty) {

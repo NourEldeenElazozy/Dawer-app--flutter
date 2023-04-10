@@ -81,7 +81,7 @@ class _messagesState extends State<messages> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
+                          borderRadius: BorderRadius.circular(20.0),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.indigo.withOpacity(0.4),
@@ -98,7 +98,7 @@ class _messagesState extends State<messages> {
 
 
                           title: mediumText(
-                            qs['sender'],ColorResources.redF22,18
+                            qs['sender'],Colors.deepOrange,18
 
                           ),
                           subtitle: Row(

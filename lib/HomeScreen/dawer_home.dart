@@ -7,9 +7,12 @@ import 'package:dawerf/Utiils/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:flutter_offline/flutter_offline.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class DawerHome extends StatefulWidget {
-  const DawerHome({Key? key}) : super(key: key);
+    final PageController pageViewController =  PageController();
+     DawerHome({Key? key}) : super(key: key);
 
   @override
   State<DawerHome> createState() => _DawerHomeState();
@@ -18,6 +21,7 @@ class DawerHome extends StatefulWidget {
 CollectionReference student = FirebaseFirestore.instance.collection('students');
 
 class _DawerHomeState extends State<DawerHome> {
+  
   CollectionReference student = FirebaseFirestore.instance.collection('users');
   final firestoreInstance = FirebaseFirestore.instance;
   // Initial Selected Value
@@ -41,34 +45,26 @@ class _DawerHomeState extends State<DawerHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+      return Scaffold(
+       body: SingleChildScrollView(
+         child: Column(
+           children: [
 
-            Padding(
+             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
+               child: Container(
+                 child: Row(
+                   children: [
+                     Padding(
+                       padding: const EdgeInsets.all(15.0),
 
-                    )
-                  ],
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  mediumText("مايحدث الأن", ColorResources.black, 16),
-                ],
-              ),
-            ),
+                     )
+                   ],
+                 ),
+               ),
+             ),
+               
+            
             Container(
               width: double.infinity,
 
@@ -111,124 +107,164 @@ class _DawerHomeState extends State<DawerHome> {
               ),
             ),
             SizedBox(height: 50,),
-            StreamBuilder(
-                stream: ads.snapshots(),
-                builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                  if (streamSnapshot.hasData) {
-                    return Container(
-                      height: 350,
-                        width: 400,
-                        child: CarouselSlider.builder(
-                          itemCount: streamSnapshot.data!.docs.length,
-                          options: CarouselOptions(
-                            scrollDirection: Axis.vertical,
-                            aspectRatio: 2.0,
-                            enlargeCenterPage: true,
-                            autoPlay: true,
-                          ),
-                          itemBuilder: (ctx, index, realIdx) {
-                            final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[index];
-                            return InkWell(
-                              onTap: () {
-                                Get.to(NewsPage(documentSnapshot['title'],documentSnapshot['description'],documentSnapshot['image']));
-                              },
-                              child: Container(
-                                width: 500,
+             Padding(
+               padding: const EdgeInsets.only(left: 25.0, right: 25),
+               child: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
 
-
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          documentSnapshot['image'].toString()),
-                                      fit: BoxFit.cover),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        mediumText(documentSnapshot['title'],
-                                            ColorResources.black, 25),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        mediumText(documentSnapshot['description'],
-                                            ColorResources.black, 20),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                    mediumText("مايحدث الأن", ColorResources.black, 16),
+                  ],
+                ),
+             ),
+           StreamBuilder(
+             stream: ads.snapshots(),
+             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              if(streamSnapshot.hasData){
+                return ListView.separated(
+                        shrinkWrap: true,
+                        itemCount:streamSnapshot.data!.docs.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                          return InkWell(
+                            onTap: ()
+                            {
+                              if(documentSnapshot['image'].toString() != null)
+                              {
+                                  Get.to(NewsPage(documentSnapshot['title'],documentSnapshot['description'],documentSnapshot['image'], timeago.format(documentSnapshot['date'].toDate())));                              }
+                            },
+                             child: Container(
+                              padding: EdgeInsets.all(17),
+                              margin: EdgeInsets.only(left: 25, right: 25),
+                              decoration: BoxDecoration(color:  Colors.grey.withAlpha(30),borderRadius: BorderRadius.circular(8)),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 110,
+                                    width: 110,
+                                    clipBehavior: Clip.hardEdge,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                                    child: 
+                                    Image.network( documentSnapshot['image'].toString(),fit: BoxFit.fill,width: 110,height: 110),
+                                  ),
+                                  const SizedBox(width: 20,),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 110,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(child: Text(documentSnapshot['title'], overflow:TextOverflow.ellipsis,maxLines: 3,
+                                            style: Theme.of(context).textTheme.titleMedium,)
+                                          ),
+                                         Text(documentSnapshot['description'], overflow:TextOverflow.ellipsis,maxLines: 3,
+                                            style: Theme.of(context).textTheme.bodyText1),
+                                          
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(timeago.format(documentSnapshot['date'].toDate()),style: Theme.of(context).textTheme.labelMedium),
+                                              
+                                            ],
+                                          ),
+                                ],
+                              )
+                              
+                             ),
+                             
+                                  ),
+                                ],
                               ),
-                            );
-                          },
-                        ));
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }),
-            SizedBox(
-              height: 15,
-            ),
-            /*
-               Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  height: 120,
-                  width: 120,
-                  padding: new EdgeInsets.all(10.0),
-                  child: Card(
-                    child: _buildButtonColumn(
-                        Colors.cyan,
-
-                      "assets/images/Vector.png",
-
-                        'الأخبار'),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
+                             )
+                             
+                          );
+                          
+                        }
+                        , separatorBuilder: (BuildContext context, int index) { return Container(height: 15);},
+                );
+              }else
+                return _widthOutNetworkView();
+               
+           }
+           ),
+                // StreamBuilder(
+                //     stream: ads.snapshots(),
+                //     builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                //       if (streamSnapshot.hasData) {
+                //         return Container(
+                //           height: 350,
+                //             width: 400,
+                //             child: CarouselSlider.builder(
+                //               itemCount: streamSnapshot.data!.docs.length,
+                //               options: CarouselOptions(
+                //                 scrollDirection: Axis.vertical,
+                //                 aspectRatio: 2.0,
+                //                 enlargeCenterPage: true,
+                //                 autoPlay: true,
+                //               ),
+                //               itemBuilder: (ctx, index, realIdx) {
+                //                 final DocumentSnapshot documentSnapshot =
+                //                 streamSnapshot.data!.docs[index];
+                //                 return InkWell(
+                //                   onTap: () {
+                //                     Get.to(NewsPage(documentSnapshot['title'],documentSnapshot['description'],documentSnapshot['image']));
+                //                   },
+                //                   child: Container(
+                //                     width: 500,
+           
+           
+                //                     margin: EdgeInsets.symmetric(horizontal: 5.0),
+                //                     decoration: BoxDecoration(
+                //                       borderRadius: BorderRadius.circular(10.0),
+                //                       image: DecorationImage(
+                //                           image: NetworkImage(
+                //                               documentSnapshot['image'].toString()),
+                //                           fit: BoxFit.cover),
+                //                     ),
+                //                     child: Column(
+                //                       children: [
+                //                         Row(
+                //                           children: [
+                //                             mediumText(documentSnapshot['title'],
+                //                                 ColorResources.black, 25),
+                //                           ],
+                //                         ),
+                //                         Row(
+                //                           children: [
+                //                             mediumText(documentSnapshot['description'],
+                //                                 ColorResources.black, 20),
+                //                           ],
+                //                         ),
+                //                       ],
+                //                     ),
+                //                   ),
+                //                 );
+                //               },
+                //             ));
+                //       }
+                //       return const Center(
+                //         child: CircularProgressIndicator(),
+                //       );
+                //     }),
+                SizedBox(
+                  height: 15,
                 ),
-                Container(
-                  height: 120,
-                  width: 120,
-                  padding: new EdgeInsets.all(10.0),
-                  child: Card(
-                    child: _buildButtonColumn(
-                        ColorResources.redF22,   "assets/images/fff.png", 'الحاويات'),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 120,
-                  width: 120,
-                  padding: new EdgeInsets.all(10.0),
-                  child: Card(
-                    child: _buildButtonColumn(
-                        ColorResources.green,   "assets/images/recycle-symbol.png", 'بلاغ'),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-             */
-
-
-
-          ],
+                
+                     
+             
+          
+           ]
         ),
       ),
     );
+      }
   }
-}
+
 
 Column _buildButtonColumn(Color color, String img, String label) {
   return Column(
@@ -255,4 +291,25 @@ Column _buildButtonColumn(Color color, String img, String label) {
       ),
     ],
   );
+
+  
 }
+ 
+  Widget _widthOutNetworkView(){
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children:
+        [
+          Image.asset("assets/images/noInternet.png",fit: BoxFit.contain,height: 125,width: 125,),
+          SizedBox(height: 10,),
+          DefaultTextStyle(
+            style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w500),
+            child: Text("Check Internet and try again ☺",style: TextStyle(color: Colors.black.withOpacity(0.8)),)
+          ),
+        ],
+      ),
+    );
+  }
+ 

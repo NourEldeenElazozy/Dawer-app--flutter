@@ -3,10 +3,11 @@ import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
 import 'package:flutter/material.dart';
 class NewsPage extends StatelessWidget {
-  const NewsPage(this.title, this.description,this.image);
+  const NewsPage(this.title, this.description,this.image, this.date);
    final String title;
    final String description;
   final String image;
+  final String date;
 
 
 
@@ -25,11 +26,7 @@ class NewsPage extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  ListTile(
-
-                    title:  mediumText(title,ColorResources.black4A4,20),
-
-                  ),
+                
                   Container(
                     width: 400,
                     height: 255,
@@ -41,12 +38,15 @@ class NewsPage extends StatelessWidget {
                           fit: BoxFit.cover),
                     ),
                   ),
+  ListTile(
 
+                    title:  mediumText(title,ColorResources.black4A4,20),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: mediumText(
+                    child: Text(
                       description,
-                        ColorResources.black4A4,20
+                      style: Theme.of(context).textTheme.titleMedium
                     ),
                   ),
 

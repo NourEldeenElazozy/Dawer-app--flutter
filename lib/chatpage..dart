@@ -96,7 +96,7 @@ print( User.ticket);
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(backgroundColor: ColorResources.custom,title:
+        appBar: AppBar(backgroundColor: Colors.deepOrange,title:
           mediumText(
            'الدعم الفني',ColorResources.whiteF6F,22
         )),
@@ -117,22 +117,22 @@ print( User.ticket);
                   children: [
                     Expanded(
                       child: TextFormField(
-                        style: TextStyle(color: ColorResources.whiteF6F,fontFamily: TextFontFamily.KHALED_FONT),
+                        style: TextStyle(color: ColorResources.black4A4,fontFamily: TextFontFamily.KHALED_FONT),
                         controller: message,
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: ColorResources.custom,
+                          fillColor:Colors.black87.withAlpha(30),
                           hintText: 'محتوي الرسالة',
-                          hintStyle: TextStyle(color: ColorResources.whiteF6F,fontFamily: TextFontFamily.KHALED_FONT),
+                          hintStyle: TextStyle(color: ColorResources.black4A4,fontFamily: TextFontFamily.KHALED_FONT),
                           enabled: true,
                           contentPadding: const EdgeInsets.only(
-                              left: 14.0, bottom: 8.0, top: 8.0),
+                              left: 14.0, bottom: 8.0, top: 8.0, right: 8),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.purple),
+                            borderSide: new BorderSide(color: Colors.deepOrange),
                             borderRadius: new BorderRadius.circular(10),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.purple),
+                            borderSide: new BorderSide(color: Colors.blue),
                             borderRadius: new BorderRadius.circular(10),
                           ),
                         ),
@@ -156,7 +156,7 @@ print( User.ticket);
                           message.clear();
                         }
                       },
-                      icon: Icon(Icons.send_sharp,color: ColorResources.blue0C1),
+                      icon: Icon(Icons.send_sharp,color: Colors.deepOrange),
                     ),
                   ],
                 ),

@@ -65,6 +65,7 @@ dev_dependencies:
   quickalert: ^1.0.1
   timeago: ^3.3.0
   url_launcher: ^6.1.8
+  flutter_offline: ^2.1.0
 
 
 

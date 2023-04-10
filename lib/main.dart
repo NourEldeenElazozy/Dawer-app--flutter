@@ -11,6 +11,7 @@ import 'package:dawerf/AuthScreens/Login.dart';
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/text_font_family.dart';
 import 'package:dawerf/menu.dart';
+import 'package:dawerf/onBoarding/_OnBoardingPageState.dart';
 import 'package:dawerf/report.dart';
 import 'firebase_options.dart';
 
@@ -47,7 +48,7 @@ class DoctorApp extends StatelessWidget {
         buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
         fontFamily: TextFontFamily.AVENIR_LT_PRO_BOOK,
       ),
-      home: WelcomeScreen(),
+      home: OnBoardingSceen(),
     );
   }
 }
