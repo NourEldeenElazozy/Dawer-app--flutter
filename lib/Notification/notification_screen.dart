@@ -13,7 +13,6 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
 
       body: Column(
-
         children: [
           Flexible(
             child: StreamBuilder(
@@ -30,9 +29,10 @@ mainAxisAlignment: MainAxisAlignment.center,
              
                               children: [
                                 Container(
-                                                width: 80,
+                                  
+                                                width: double.infinity,
                                                 height: 80,
-                                                margin: EdgeInsets.all(0.0),
+                                                margin: EdgeInsets.only(left: 20),
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(0.0),
                                                   image: DecorationImage(
@@ -52,7 +52,7 @@ mainAxisAlignment: MainAxisAlignment.center,
                                       color: Theme.of(context).colorScheme.surfaceVariant,
                                       child:  SizedBox(
                                         width: 350,
-                                        height: 100,
+                                        height: 80,
                                         
                                         child: Center(
                                           child: Row(
@@ -61,19 +61,21 @@ mainAxisAlignment: MainAxisAlignment.center,
                                               Padding(
                                                 padding:  EdgeInsets.all(10.0),
                                                 child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
                                                     
                                                     Row(
                                                       children: [
                                                       
-                                                           mediumText(documentSnapshot['title'], ColorResources.custom, 18),
+                                                           mediumText(documentSnapshot['title'], Colors.deepOrange, 18),
                                                       
                                                       ],
                                                     ),
                                                     Row(
 
+
                                   children:  [
-                                    mediumText(documentSnapshot['date'].toString(), ColorResources.grey777, 25),
+                                    mediumText(documentSnapshot['date'].toString(), ColorResources.grey777, 14),
 
                                             ],
                                           ),
