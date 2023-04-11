@@ -25,24 +25,10 @@ class NotificationScreen extends StatelessWidget {
                       final DocumentSnapshot documentSnapshot =
                       streamSnapshot.data!.docs[index];
                       return Row(
-mainAxisAlignment: MainAxisAlignment.center,
+                   mainAxisAlignment: MainAxisAlignment.center,
              
                               children: [
-                                Container(
-                                  
-                                                width: double.infinity,
-                                                height: 80,
-                                                margin: EdgeInsets.only(left: 20),
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(0.0),
-                                                  image: DecorationImage(
-                                                    image: AssetImage('assets/images/logo.png'),
 
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-
-                                              ),
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 20),

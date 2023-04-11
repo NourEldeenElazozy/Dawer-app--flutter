@@ -39,7 +39,7 @@ class _messagesState extends State<messages> {
 
   final Stream<QuerySnapshot> _messageStream = FirebaseFirestore.instance
       .collection('services')
-      .orderBy("date",descending: true)
+      .orderBy("date",descending: false)
      .where("sender", whereIn: [User.name, "admin"])
       .where("ticket", isEqualTo: User.ticket)
 

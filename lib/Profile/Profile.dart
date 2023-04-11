@@ -27,19 +27,7 @@ class _ProfileState extends State<Profile> {
     final _height = MediaQuery.of(context).size.height;
 
     final Stream<QuerySnapshot> products = FirebaseFirestore.instance.collection('users').snapshots();
-    your_async_method () async {
 
-      await FirebaseFirestore.instance.collection('users').where(
-          "name",
-          isEqualTo: "فراس"
-      ).get().then((event) {
-        if (event.docs.isNotEmpty) {
-          Map<String, dynamic> documentData = event.docs.single.data(); //if it is a single document
-          print('documentData');
-          print(documentData['name']);
-        }
-      }).catchError((e) => print("error fetching data: $e"));
-    }
 
     return Directionality(
       textDirection: TextDirection.rtl,

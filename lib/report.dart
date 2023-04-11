@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dawerf/HomeScreen/dawer_home.dart';
+import 'package:dawerf/Utiils/User.dart';
 import 'package:dawerf/menu.dart';
 import 'package:intl/intl.dart' as a ;
 import 'package:dawerf/Controller/location_controller.dart';
@@ -65,7 +66,7 @@ class _ReportScreenState extends State<ReportScreen> {
   final TextEditingController phoneController = TextEditingController();
 
   final TextEditingController NoteController = TextEditingController();
-
+  final TextEditingController TitleController = TextEditingController();
   final TextEditingController dateOfBirthController = TextEditingController();
 
   final TextEditingController addressController = TextEditingController();
@@ -87,8 +88,8 @@ class _ReportScreenState extends State<ReportScreen> {
       'dateAdded': dateAdded,
       'assignedCompany':null,
       'favorite': false,
-
-
+      'senderPhone': User.phone,
+      'title': TitleController.text,
     })
         .then((value) => print("Report Added $value"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -194,8 +195,7 @@ class _ReportScreenState extends State<ReportScreen> {
     print('dateSlug=$dateSlug');
 
     getsections();
-    final CollectionReference containers =
-    FirebaseFirestore.instance.collection('containers');
+
 
 
     return Directionality(
@@ -270,7 +270,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                     text:'تم إضافة النموذج بنجاح',
                                     confirmBtnText: 'موافق',
                                     onConfirmBtnTap: () {
-                                    Get.to(DawerHome());            
+                                    Get.to(BottomNavBar());
 
                                     },
                                     context: context,
@@ -538,6 +538,21 @@ class _ReportScreenState extends State<ReportScreen> {
                               ),
 
                             )
+                          ),
+                          SizedBox(height: 20,),
+                          Container(
+                              child: TextField(
+                                controller: TitleController,
+                                decoration: InputDecoration(
+                                  hintText: 'عنوان البلاغ',
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                    BorderSide(width: 3, color: Colors.orangeAccent), //<-- SEE HERE
+                                    borderRadius: BorderRadius.circular(50.0),
+                                  ),
+                                ),
+
+                              )
                           ),
                           SizedBox(height: 20,),
 
