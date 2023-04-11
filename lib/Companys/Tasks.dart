@@ -135,14 +135,9 @@ class _TasksReportsState extends State<TasksReports> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0),
                               boxShadow: [
-                                BoxShadow(
-                                  color: Colors.indigo.withOpacity(0.4),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3), // changes position of shadow
-                                ),
+                               
                               ],
-                              color: ColorResources.custom
+                              color: Colors.grey.withAlpha(20)
 
                           ),
                           child: Padding(
@@ -161,21 +156,21 @@ class _TasksReportsState extends State<TasksReports> {
                                           children:  [
 
                                             bookText(
-                                                documentSnapshot['description'], ColorResources.white, 25),
+                                                documentSnapshot['description'], Colors.black54, 18),
 
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 50,),
+                                      SizedBox(height: 20,),
                                       Center(
                                         child: Row(
 
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                           children:  [
-                                            mediumText('اضغط لمعرفة التفاصيل', ColorResources.white, 18),
+                                            mediumText('اضغط في حالة الإنتهاء ', Colors.black26, 18),
 
-                                            mediumText(  documentSnapshot['dateAdded'], ColorResources.white, 25),
+                                            mediumText(  documentSnapshot['dateAdded'], Colors.black26, 14),
 
 
                                           ],

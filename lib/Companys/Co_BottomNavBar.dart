@@ -36,30 +36,31 @@ class Co_BottomNavBar extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.home),
           title: ("الرئيسية"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.deepOrange,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.restore_from_trash_rounded),
           title: ("البلاغات"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.deepOrange,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
+          
           icon: const Icon(Icons.recycling_rounded, color: Colors.white),
-          activeColorPrimary: Colors.orange,
+          activeColorPrimary: Colors.deepOrange,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.task_alt_sharp),
           title: ("المهام"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.deepOrange,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.person),
           title: ("حسابي"),
-          activeColorPrimary: Colors.deepPurple,
+          activeColorPrimary: Colors.deepOrange,
           inactiveColorPrimary: Colors.grey,
         ),
       ];

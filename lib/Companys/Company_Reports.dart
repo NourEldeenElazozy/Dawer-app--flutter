@@ -27,11 +27,6 @@ Map<String, dynamic>? a;
          ReportDet.typeReport=a!['typeReport'];
          ReportDet.documentID=id;
 
-
-
-
-
-
       }).catchError((e) => print("error fetching data: $e"));
 
 
@@ -54,7 +49,7 @@ Map<String, dynamic>? a;
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                 if(streamSnapshot.data?.size == 0){
                   return  Center(
-                    child: mediumText("لا يوجد عمليات تم قبولها", Colors.red, 20),
+                    child: Image.asset("assets/images/404.png"),
                   );
                 }
                  if (streamSnapshot.hasData) {
@@ -80,21 +75,16 @@ Map<String, dynamic>? a;
 
                         },
                         child: Container(
-                          width: 450,
-                          height: 180,
+                          width: double.infinity,
+                          height: 100,
 
                           margin: EdgeInsets.all(12.0),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(20.0),
                               boxShadow: [
-                                BoxShadow(
-                                  color: Colors.indigo.withOpacity(0.4),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3), // changes position of shadow
-                                ),
+                                
                               ],
-                              color: ColorResources.blue0C1
+                              color:Colors.grey.withAlpha(30)
 
                           ),
                           child: Padding(
@@ -110,24 +100,29 @@ Map<String, dynamic>? a;
 
                                       Center(
                                         child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children:  [
 
+                                          
                                             bookText(
-                                                documentSnapshot['description'], ColorResources.grey777, 25),
+                                                documentSnapshot['description'], ColorResources.grey777, 15),
+ SizedBox(
+                                            height: 50,
+                                            width: 50,
+                                            child: const Icon(Icons.recycling_rounded, color: Colors.deepOrange),),
 
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 50,),
                                       Center(
                                         child: Row(
 
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                           children:  [
-                                            mediumText('اضغط لمعرفة التفاصيل', ColorResources.grey777, 18),
+                                            mediumText('اضغط لمعرفة التفاصيل', ColorResources.grey777, 14),
 
-                                            mediumText(  documentSnapshot['dateAdded'], ColorResources.grey777, 25),
+                                            mediumText(  documentSnapshot['dateAdded'], ColorResources.grey777, 14),
 
 
                                           ],

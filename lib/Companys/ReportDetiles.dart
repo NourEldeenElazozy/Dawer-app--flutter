@@ -118,7 +118,8 @@ class _ReportDetailsState extends State<ReportDetails> {
                      children: [
                         InkWell(
                           onTap: () {
-                            _launchUrl(ReportDet.location.toString());
+                             LaunchMap(ReportDet.location.toString());
+                            
 
                           },
                           child: Image(
@@ -203,6 +204,18 @@ class _ReportDetailsState extends State<ReportDetails> {
        ),
      ),
    );
+  }
+
+    Future<void> LaunchMap(documentSnapshot) async {
+   final String googleMapslocationUrl = "https://www.google.com/maps/search/?api=1&query=${documentSnapshot}";
+    final String encodedURl = Uri.encodeFull(googleMapslocationUrl);
+
+    if (await canLaunch(encodedURl)) {
+      await launch(encodedURl);
+    } else {
+      print('Could not launch $encodedURl');
+      throw 'Could not launch $encodedURl';
+    }
   }
 
 }
