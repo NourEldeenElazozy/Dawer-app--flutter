@@ -99,7 +99,7 @@ class _ReportScreenState extends State<ReportScreen> {
     return notifications
         .add({
       'title': title,
-
+      'phone': User.phone,
       'date': date,
     })
         .then((value) => print("Report Added $value"))

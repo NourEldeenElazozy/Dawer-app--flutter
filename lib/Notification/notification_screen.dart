@@ -1,3 +1,4 @@
+import 'package:dawerf/Utiils/User.dart';
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +7,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:timeago/timeago.dart' as timeago;
 class NotificationScreen extends StatelessWidget {
    NotificationScreen({Key? key}) : super(key: key);
-  final CollectionReference notifications =
-  FirebaseFirestore.instance.collection('notifications');
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
       body: Column(
         children: [
           Flexible(
             child: StreamBuilder(
-              stream: notifications.snapshots(), //build connection
+              stream: FirebaseFirestore.instance.collection('notifications').where("phone", isEqualTo: User.phone).snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                 if (streamSnapshot.hasData) {
                   return ListView.builder(
