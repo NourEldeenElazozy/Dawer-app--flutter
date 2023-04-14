@@ -95,10 +95,11 @@ class _ReportScreenState extends State<ReportScreen> {
         .catchError((error) => print("Failed to add user: $error"));
   }
   Future<void> Addnotifications(date,title) {
+    User.numOfOrders ++;
     // Call the user's CollectionReference to add a new user
     return notifications
         .add({
-      'title': title,
+      'title': "تم وصول بلاغك بنجاح",
       'phone': User.phone,
       'date': date,
     })
@@ -270,7 +271,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                     text:'تم إضافة النموذج بنجاح',
                                     confirmBtnText: 'موافق',
                                     onConfirmBtnTap: () {
-                                    Get.to(BottomNavBar());
+                                    Get.to(DawerHome());
 
                                     },
                                     context: context,

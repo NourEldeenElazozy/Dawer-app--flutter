@@ -3,14 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OnBoardingSceen extends StatefulWidget {
-  const OnBoardingSceen({Key? key}):super(key:key);
+class OnBoardingPageSceen extends StatefulWidget {
+  const OnBoardingPageSceen({Key? key}):super(key:key);
 
   @override
-  State<OnBoardingSceen> createState() => _OnBoardingSceenState();
+  State<OnBoardingPageSceen> createState() => _OnBoardingSceenState();
 }
 
-class _OnBoardingSceenState extends State<OnBoardingSceen> {
+class _OnBoardingSceenState extends State<OnBoardingPageSceen> {
   late PageController _pageController;
   int _pageIndex = 0;
   @override
@@ -93,6 +93,7 @@ class DotIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(height: isActive? 12 : 4,
     width: 4,
+    padding: EdgeInsets.all(20),
     duration:Duration(microseconds: 300) ,
     decoration: BoxDecoration(
       color: isActive? Colors.orange : Colors.orange.withOpacity(0.4),
@@ -128,18 +129,15 @@ class OnBoardingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double h = Get.height;
+    double w = Get.width;
     return Column(children: [
-      const Spacer(),
       Image.asset(image
-      , height: 250,),
-      const Spacer(),
+      , height: h/2, width: w,),
       Text(title, 
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.headline4!.copyWith(fontWeight:FontWeight.w500 ),),
-      const SizedBox(height: 16,),
-      Text(desc,
-      textAlign: TextAlign.center,),
-      const Spacer(),
+      style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight:FontWeight.w500 ),),
+           const Spacer(),
     ]);
   }
 }

@@ -90,7 +90,8 @@ class _messagesState extends State<messages> {
                               offset: const Offset(0, 3), // changes position of shadow
                             ),
                           ],
-                          color: ColorResources.whiteF6F),
+                          color: email == qs['sender']
+                      ?ColorResources.whiteF6F:ColorResources.blue0C1) ,
 
                       child: SizedBox(
                         width: 300,
@@ -107,8 +108,11 @@ class _messagesState extends State<messages> {
                               Container(
 
 
-                                child: mediumText(
-                                    qs['text'],ColorResources.blue0C1,16
+                                child: Text(
+                                    qs['text'], style: TextStyle(
+                                      fontSize: 16,
+                                      color: email == qs['sender']?ColorResources.black4A4 :ColorResources.whiteF7F 
+                                    ),
 
                                 ),
                               ),

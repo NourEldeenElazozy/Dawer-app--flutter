@@ -66,73 +66,75 @@ Map<String, dynamic>? a;
                       }else{
 
                       }
-                      return InkWell(
-                        onTap: (){
-                          print(ReportDet.image);
-
-                          getReportsd(documentSnapshot.id);
-                          Get.to(ReportDetails());
-
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 100,
-
-                          margin: EdgeInsets.all(12.0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                
-                              ],
-                              color:Colors.grey.withAlpha(30)
-
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-
-                                    children: [
-
-                                      Center(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children:  [
-
-                                          
-                                            bookText(
-                                                documentSnapshot['description'], ColorResources.grey777, 15),
- SizedBox(
-                                            height: 50,
-                                            width: 50,
-                                            child: const Icon(Icons.recycling_rounded, color: Colors.deepOrange),),
-
-                                          ],
+                      return Flexible(
+                        child: InkWell(
+                          onTap: (){
+                            print(ReportDet.image);
+                      
+                            getReportsd(documentSnapshot.id);
+                            Get.to(ReportDetails());
+                      
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 100,
+                      
+                            margin: EdgeInsets.all(12.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  
+                                ],
+                                color:Colors.grey.withAlpha(30)
+                      
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                      
+                                      children: [
+                      
+                                        Center(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children:  [
+                      
+                                            
+                                              bookText(
+                                                  documentSnapshot['description'], ColorResources.grey777, 15),
+                       SizedBox(
+                                              height: 50,
+                                              width: 50,
+                                              child: const Icon(Icons.recycling_rounded, color: Colors.deepOrange),),
+                      
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Center(
-                                        child: Row(
-
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                                          children:  [
-                                            mediumText('اضغط لمعرفة التفاصيل', ColorResources.grey777, 14),
-
-                                            mediumText(  documentSnapshot['dateAdded'], ColorResources.grey777, 14),
-
-
-                                          ],
+                                        Center(
+                                          child: Row(
+                      
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                                            children:  [
+                                              mediumText('اضغط لمعرفة التفاصيل', ColorResources.grey777, 14),
+                      
+                                              mediumText(  documentSnapshot['dateAdded'], ColorResources.grey777, 14),
+                      
+                      
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-
-                                )
-                              ],
+                                      ],
+                                    ),
+                      
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

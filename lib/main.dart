@@ -22,6 +22,8 @@ import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
+import 'onBoarding/OnBoarding.dart';
+
 void main() async  {
 
 
@@ -48,7 +50,7 @@ class DoctorApp extends StatelessWidget {
         buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
         fontFamily: TextFontFamily.AVENIR_LT_PRO_BOOK,
       ),
-      home: OnBoardingSceen(),
+      home: OnboardingScreen(),
     );
   }
 }

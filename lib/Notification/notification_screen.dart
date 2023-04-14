@@ -32,33 +32,36 @@ class NotificationScreen extends StatelessWidget {
 
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(top: 20),
+                                    padding: const EdgeInsets.only(top: 20, left: 10,right: 10),
                                     child: Card(
                                       elevation: 10,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                                       color: Theme.of(context).colorScheme.surfaceVariant,
                                       child:  SizedBox(
                                         width: 350,
-                                        height: 80,
+                                        height: 100,
                                         
-                                        child: Center(
+                                        child: Flexible(
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Padding(
                                                 padding:  EdgeInsets.all(10.0),
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     
                                                     Row(
                                                       children: [
                                                       
                                                            mediumText(documentSnapshot['title'], Colors.deepOrange, 18),
-                                                      
+                                                          
+                                                          Icon(Icons.recycling, color: Colors.deepOrange,)      
                                                       ],
                                                     ),
+                                                    
                                                     Row(
+                                                      
 
 
                                   children:  [

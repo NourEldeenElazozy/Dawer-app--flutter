@@ -41,21 +41,21 @@ class _ContainersState extends State<Containers> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     mediumText("جميع صناديق القمامة", ColorResources.grey777, 16),
-                    DropdownButton(
-                      value: dropdownvalue,
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(items),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownvalue = newValue!;
-                        });
-                      },
-                    ),
+                    // DropdownButton(
+                    //   value: dropdownvalue,
+                    //   icon: const Icon(Icons.keyboard_arrow_down),
+                    //   items: items.map((String items) {
+                    //     return DropdownMenuItem(
+                    //       value: items,
+                    //       child: Text(items),
+                    //     );
+                    //   }).toList(),
+                    //   onChanged: (String? newValue) {
+                    //     setState(() {
+                    //       dropdownvalue = newValue!;
+                    //     });
+                    //   },
+                    // ),
                   ],
                 ),
               ),
