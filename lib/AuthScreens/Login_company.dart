@@ -43,6 +43,7 @@ class _LoginCompanyScreenState extends State<LoginCompanyScreen> {
         User.numOfOrders = documentData['numOfOrders'];
         //test=documentData['name'];
         print("yes data");
+        print( User.numOfOrders);
       }
       if (event.docs.isEmpty) {
         test = "no data";

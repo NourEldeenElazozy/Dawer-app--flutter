@@ -21,12 +21,26 @@ UpdateCompany(){
       .update({
     //"companyId":User.documentID,
 
-    "numberOfOrederFiexd":int.parse("numberOfOrederFiexd")+1,
     "companyStatus":3
   }).then((result){
     print("new USer true");
   }).catchError((onError){
     print("onError");
+  });
+}
+
+
+Updatenum(){
+  print(User.documentID);
+  FirebaseFirestore.instance
+      .collection('companies')
+      .doc(User.documentID)
+      .update({
+    'numOfOrders': FieldValue.increment(1),
+  }).then((result){
+    print("new companies  true");
+  }).catchError((onError){
+    print("onError companies");
   });
 }
 UpdateRemoveCompany(){
@@ -255,7 +269,7 @@ class _alertDialogState extends State<alertDialog2> {
 
                               SnackBar snackBar;
                               UpdateCompany().then(
-
+                                  Updatenum(),
                                   snackBar = SnackBar(
                                     content: mediumText(
                                         'تم انهاء العملية بنجاح',
