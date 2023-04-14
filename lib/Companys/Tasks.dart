@@ -20,6 +20,8 @@ UpdateCompany(){
       .doc(ReportDet.documentID)
       .update({
     //"companyId":User.documentID,
+
+    "numberOfOrederFiexd":int.parse("numberOfOrederFiexd")+1,
     "companyStatus":3
   }).then((result){
     print("new USer true");
@@ -248,11 +250,12 @@ class _alertDialogState extends State<alertDialog2> {
 
                           color: ColorResources.custom,
                           onPressed: (){
-                            Get.back();
+
 
 
                               SnackBar snackBar;
                               UpdateCompany().then(
+
                                   snackBar = SnackBar(
                                     content: mediumText(
                                         'تم انهاء العملية بنجاح',
@@ -267,7 +270,7 @@ class _alertDialogState extends State<alertDialog2> {
                                     ),
                                   ),
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar)
+                                      .showSnackBar(snackBar),   Get.back()
                               );
                               setState(() {
 
