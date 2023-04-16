@@ -21,6 +21,47 @@ print(ReportDet.documentID);
     print("onError");
   });
 }
+getcom(phone, pass) async {
+  await FirebaseFirestore.instance
+      .collection('companies')
+      .where("phone", isEqualTo: phone.toString())
+      .where("password", isEqualTo: pass.toString())
+      .get()
+      .then((event) {
+    if (event.docs.isNotEmpty) {
+      Map<String, dynamic> documentData =
+      event.docs.single.data(); //if it is a single document
+
+      event.docs.forEach((f) {
+        User.documentID = f.reference.id;
+        print("documentIDs---- ${f.reference.id}");
+      });
+
+      print("yes data22");
+
+
+      User.numOfOrders ++;
+      print("yes sw ${User.numOfOrders}");
+      //test=documentData['name'];
+
+      print( User.numOfOrders);
+    }
+
+  }).catchError((e) => print("error fetching data: $e"));
+}
+Updatenum(){
+  print(User.documentID);
+  FirebaseFirestore.instance
+      .collection('companies')
+      .doc(User.documentID)
+      .update({
+    'numOfOrders': FieldValue.increment(1),
+  }).then((result){
+    print("new companies  true");
+  }).catchError((onError){
+    print("onError companies");
+  });
+}
 UpdateCancelCompany(){
   print(ReportDet.documentID);
   FirebaseFirestore.instance
@@ -142,10 +183,12 @@ class _ReportDetailsState extends State<ReportDetails> {
                    MaterialButton(
 
                      color: ColorResources.custom,
-                     onPressed: (){
+                     onPressed: () async {
 
                        SnackBar snackBar;
-                       UpdateCompany().then(
+                       await UpdateCompany().then(
+                          await getcom(User.phone, User.password),
+                       await Updatenum(),
                         snackBar = SnackBar(
                        content: mediumText(
                        'تم قبول العملية بنجاح',

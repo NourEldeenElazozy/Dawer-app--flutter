@@ -14,6 +14,7 @@ class TasksReports extends StatefulWidget {
   State<TasksReports> createState() => _TasksReportsState();
 }
 UpdateCompany(){
+  print('ReportDet.documentID');
   print(ReportDet.documentID);
   FirebaseFirestore.instance
       .collection('reporting-service')
@@ -23,9 +24,10 @@ UpdateCompany(){
 
     "companyStatus":3
   }).then((result){
-    print("new USer true");
+    print("new USesr true");
   }).catchError((onError){
-    print("onError");
+    print('onErrorss');
+    print(onError);
   });
 }
 
@@ -42,6 +44,35 @@ Updatenum(){
   }).catchError((onError){
     print("onError companies");
   });
+}
+getcom(phone, pass) async {
+  await FirebaseFirestore.instance
+      .collection('companies')
+      .where("phone", isEqualTo: phone.toString())
+      .where("password", isEqualTo: pass.toString())
+      .get()
+      .then((event) {
+    if (event.docs.isNotEmpty) {
+      Map<String, dynamic> documentData =
+      event.docs.single.data(); //if it is a single document
+
+      event.docs.forEach((f) {
+        User.documentID = f.reference.id;
+        print("documentID---- ${f.reference.id}");
+      });
+
+
+      User.name = documentData['name'];
+      User.phone = documentData['phone'];
+      User.password = documentData['password'];
+      User.city = documentData['city'];
+      User.numOfOrders = documentData['numOfOrders'];
+      //test=documentData['name'];
+      print("yes data");
+      print( User.numOfOrders);
+    }
+
+  }).catchError((e) => print("error fetching data: $e"));
 }
 UpdateRemoveCompany(){
   print(ReportDet.documentID);
@@ -134,7 +165,7 @@ class _TasksReportsState extends State<TasksReports> {
                       streamSnapshot.data!.docs[index];
                       return InkWell(
                         onTap: (){
-
+                          ReportDet.documentID= documentSnapshot.id;
 
 
                           showDialog(
@@ -263,13 +294,14 @@ class _alertDialogState extends State<alertDialog2> {
                         child: MaterialButton(
 
                           color: ColorResources.custom,
-                          onPressed: (){
+                          onPressed: () async {
 
 
 
                               SnackBar snackBar;
                               UpdateCompany().then(
                                   Updatenum(),
+                                  await getcom(User.phone,User.password),
                                   snackBar = SnackBar(
                                     content: mediumText(
                                         'تم انهاء العملية بنجاح',

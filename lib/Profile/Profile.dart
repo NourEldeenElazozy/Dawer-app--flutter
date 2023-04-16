@@ -16,17 +16,54 @@ class Profile extends StatefulWidget {
 
 
   @override
+
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      print('dd');
+    });
 
+  }
   @override
   Widget build(BuildContext context) {
+    int? numw;
+    getcom(phone, pass) async {
+      await FirebaseFirestore.instance
+          .collection('companies')
+          .where("phone", isEqualTo: phone.toString())
+          .where("password", isEqualTo: pass.toString())
+          .get()
+          .then((event) {
+        if (event.docs.isNotEmpty) {
+          Map<String, dynamic> documentData =
+          event.docs.single.data(); //if it is a single document
+
+          event.docs.forEach((f) {
+            User.documentID = f.reference.id;
+            print("documentID---- ${f.reference.id}");
+          });
+
+
+
+          User.numOfOrders = documentData['numOfOrders'];
+          numw=documentData['numOfOrders'];
+          //test=documentData['name'];
+          print("yes data");
+          print(numw);
+        }
+
+      }).catchError((e) => print("error fetching data: $e"));
+    }
+    getcom(User.phone, User.password);
     final _width = MediaQuery.of(context).size.width;
     final _height = MediaQuery.of(context).size.height;
 
-    final Stream<QuerySnapshot> products = FirebaseFirestore.instance.collection('users').snapshots();
+
 
 
     return Directionality(
@@ -97,8 +134,19 @@ class _ProfileState extends State<Profile> {
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      mediumText(
-                                          User.numOfOrders.toString()+' بلاغ ', ColorResources.black, 20),
+                                      StreamBuilder(
+
+                                stream: FirebaseFirestore.instance.collection('companies')
+                                    .where("phone", isEqualTo: User.phone.toString())
+                                    .where("password", isEqualTo: User.password.toString()).snapshots(),
+                                  builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+
+                                  return   mediumText(
+
+                                      streamSnapshot.data!.docs[0]['numOfOrders'].toString()+' بلاغ ', ColorResources.black, 20);
+                                  },
+                                      ),
+
                                       Image.asset(
 
                                         'assets/images/recycle-symbol.png',
