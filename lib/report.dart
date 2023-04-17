@@ -62,7 +62,7 @@ class _ReportScreenState extends State<ReportScreen> {
   final LocationController locationController = Get.put(LocationController());
 
   final TextEditingController typeController = TextEditingController();
-
+  final TextEditingController aryaController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
   final TextEditingController NoteController = TextEditingController();
@@ -90,6 +90,7 @@ class _ReportScreenState extends State<ReportScreen> {
       'favorite': false,
       'senderPhone': User.phone,
       'title': TitleController.text,
+      'area': selectedLocation2,
     })
         .then((value) => print("Report Added $value"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -107,7 +108,9 @@ class _ReportScreenState extends State<ReportScreen> {
         .catchError((error) => print("Failed to add user: $error"));
   }
   String selectedLocation = '';
+  String selectedLocation2 = '';
   List<String> _listDrugs= [];
+  List<String> _listDrugs2= [];
 
 
   final ImagePicker _picker = ImagePicker();
@@ -188,7 +191,24 @@ class _ReportScreenState extends State<ReportScreen> {
       },
     );
     }
+  Future getareas() async {
 
+    if (_listDrugs2.length>5) {
+      _listDrugs2.length = 5;
+    }
+
+    FirebaseFirestore.instance.collection("areas").get().then(
+          (value) {
+        value.docs.forEach(
+              (element) {
+                var field = element.data();
+            print(element.data().values.toString());
+            _listDrugs2.add( field['title']);
+          },
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     DateTime today = new DateTime.now();
@@ -196,6 +216,7 @@ class _ReportScreenState extends State<ReportScreen> {
     print('dateSlug=$dateSlug');
 
     getsections();
+    getareas();
 
 
 
@@ -485,6 +506,43 @@ class _ReportScreenState extends State<ReportScreen> {
                                   onChanged: (newVal) {
 
                                     selectedLocation=newVal!;
+
+
+
+
+                                    this.setState(() {
+
+
+
+                                    });
+                                  },
+                                ),
+
+
+
+                              ],
+                            ),
+                          ),
+                          Container(
+
+                            child:  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                mediumText('المنطقة', ColorResources.black4A4, 16),
+                                DropdownButton<String>(
+                                  hint: bookText(selectedLocation2,ColorResources.black4A4,16),
+
+
+                                  items: _listDrugs2.map((String value)  {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: mediumText(value,ColorResources.black4A4,16),
+                                    );
+                                  }).toList(),
+
+                                  onChanged: (newVal) {
+
+                                    selectedLocation2=newVal!;
 
 
 
