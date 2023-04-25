@@ -33,6 +33,7 @@ class BottomNavBar extends StatelessWidget {
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
+          
           icon: const Icon(Icons.home),
           title: ("الرئيسية"),
           activeColorPrimary: Colors.orange,
@@ -89,6 +90,7 @@ class BottomNavBar extends StatelessWidget {
           // Navigation Bar's items animation properties.
           duration: Duration(milliseconds: 200),
           curve: Curves.ease,
+        
         ),
         screenTransitionAnimation: const ScreenTransitionAnimation(
           // Screen transition animation on change of selected tab.

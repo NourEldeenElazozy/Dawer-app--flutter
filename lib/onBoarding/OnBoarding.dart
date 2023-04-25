@@ -82,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           style: TextStyle(
                             fontFamily: "Mulish",
                             fontWeight: FontWeight.w600,
-                            fontSize: (width <= 550) ? 30 : 35,
+                            fontSize: (width <= 550) ? 25 : 30,
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -118,26 +118,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   _currentPage + 1 == contents.length
                       ? Padding(
                           padding: const EdgeInsets.all(30),
-                          child: ElevatedButton(
-                            onPressed: () {
-                             Get.to(WelcomeScreen());
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                 Get.to(WelcomeScreen());
 
-                            },
-                            child: const Text("START"),
-                            style: ElevatedButton.styleFrom(
-                            
-                              backgroundColor: Colors.deepOrange,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50),
+                                },
+                                child: const Text("التالي"),
+                               style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.deepOrange,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      elevation: 0,
+                                      padding: (width <= 550)
+                                          ? const EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 20)
+                                          : const EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 25),
+                                      textStyle: TextStyle(
+                                          fontSize: (width <= 550) ? 13 : 17),
+                                    ),
                               ),
-                              padding: (width <= 550)
-                                  ? const EdgeInsets.symmetric(
-                                      horizontal: 100, vertical: 20)
-                                  : EdgeInsets.symmetric(
-                                      horizontal: width * 0.2, vertical: 25),
-                              textStyle:
-                                  TextStyle(fontSize: (width <= 550) ? 13 : 17),
-                            ),
+                            ],
                           ),
                         )
                       : Padding(

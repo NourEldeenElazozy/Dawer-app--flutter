@@ -2,7 +2,7 @@
 
     package="com.dawer.dawerf">
    <application
-        android:label="dawerf"
+        android:label="بيئتي"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
