@@ -52,8 +52,8 @@ class _RigesterScreenState extends State<RigesterScreen> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: ColorResources.custom,
-            title:  mediumText('عودة الحياة',ColorResources.white,18),
+            backgroundColor: Colors.deepOrange,
+            title:  mediumText('بيئتي',ColorResources.white,18),
           ),
           body: Form(
             key: formKey,
@@ -89,7 +89,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                           }
                           if (value == null || value.isEmpty) {
                             print('dd');
-                            return 'error';
+                            return 'يجب كتابة اسم المستخدم';
                           }
                           return null;
                         },
@@ -99,7 +99,9 @@ class _RigesterScreenState extends State<RigesterScreen> {
                           ),
                           labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: "اسم المستخدم",
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -118,7 +120,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                           }
                           if (value == null || value.isEmpty) {
                             print('dd');
-                            return 'error';
+                            return 'يجب كتابة المدينة';
                           }
                           return null;
                         },
@@ -128,7 +130,9 @@ class _RigesterScreenState extends State<RigesterScreen> {
                           ),
                           labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: "المدينة",
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -143,7 +147,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             print('dd');
-                            return 'error';
+                            return 'يجب كتابة رقم الهاتف';
                           }
                           return null;
                         },
@@ -153,7 +157,9 @@ class _RigesterScreenState extends State<RigesterScreen> {
                           ),
                           labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: "رقم الهاتف ",
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -162,11 +168,14 @@ class _RigesterScreenState extends State<RigesterScreen> {
                       TextFormField(
                         enabled: true,
                         controller: passwordController,
-                        //controller: passwordController..text = '119900408110',
                         obscureText: _isObscure,
                         validator: (value) {
+                            if (value!.length <6 ) {
+                            print('dd');
+                            return 'يجب ان تكون كلمة المرور على الأقل 6 خانات';
+                          }
                           if (value!.isEmpty) {
-                            return 'err';
+                            return 'يجب كتابة كلمة المرور';
                           }
                           return null;
                         },
@@ -186,7 +195,9 @@ class _RigesterScreenState extends State<RigesterScreen> {
                           ),
                           labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: 'كلمة المرور',
-                          border: const OutlineInputBorder(),
+                          border:  OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -196,7 +207,11 @@ class _RigesterScreenState extends State<RigesterScreen> {
                         height: 40.0,
                         width: double.infinity,
                         child: MaterialButton(
-                            color: ColorResources.custom,
+                            color: Colors.deepOrange,
+                            splashColor: ColorResources.custom,
+                            shape: OutlineInputBorder(borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.transparent)),
+                            elevation: 5,
                             onPressed: () async {
                               print(mobileController.text);
                               print(passwordController.text);
@@ -235,7 +250,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                                   );
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
-                                  Get.offAll(LoginScreen());
+                                  Get.offAll(LoginScreen(), transition: Transition.fadeIn);
                                 }
 
                                 /*

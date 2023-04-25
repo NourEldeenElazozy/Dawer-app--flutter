@@ -201,8 +201,17 @@ class _ProfileState extends State<Profile> {
                                                   blurRadius: 2.0,
                                                   offset: Offset(0.0, 1.0))
                                             ]),
-                                        child: Center(
-                                          child:  mediumText("خروج",ColorResources.white,16),
+                                        child: InkWell(
+                                          onTap: (){
+                                            showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return alertDialog3();
+                            },);
+                                          },
+                                          child: Center(
+                                            child:  mediumText("خروج",ColorResources.white,16),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -263,4 +272,94 @@ class _ProfileState extends State<Profile> {
 
     ),
   );
+}
+
+class alertDialog3 extends StatefulWidget {
+  @override
+  State<alertDialog3> createState() => _alertDialogState();
+}
+
+class _alertDialogState extends State<alertDialog3> {
+
+
+  var passwordController = TextEditingController();
+
+  var passwordController2 = TextEditingController();
+
+  void  a;
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+
+         AlertDialog(
+
+
+              scrollable: true,
+              title: mediumText('هل تريد تسجيل الخروج؟',ColorResources.black,18),
+              content: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  child: Row(
+
+                    children: <Widget>[
+
+                      Container(
+                        width: 130,
+                        height: 40,
+                        child: MaterialButton(
+
+                          color: ColorResources.custom,
+                          onPressed: () async {
+                                    content: mediumText(
+                                        'تم انهاء العملية بنجاح',
+                                        ColorResources.whiteF6F,
+                                        14);
+                                    backgroundColor: (Colors.green);
+                                   
+                                  
+                                   Get.offAll(WelcomeScreen(),transition: Transition.fade);
+                              setState(() {
+
+                              });
+
+
+                          },
+                          child:mediumText('نعم',ColorResources.whiteF6F,14),
+                        ),
+                      ),
+                      SizedBox(width: 5,),
+                      Container(
+                        width: 130,
+                        height: 40,
+                        child: MaterialButton(
+
+                          color: ColorResources.redF22,
+                          onPressed: (){
+                            Get.back();
+                            setState(() {
+
+                            });
+
+
+                          },
+                          child:mediumText('لا',ColorResources.white,14),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+        ],
+      ),
+    );
+  }
 }

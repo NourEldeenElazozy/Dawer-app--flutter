@@ -66,8 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: ColorResources.custom,
-            title:  mediumText('عودة الحياة',ColorResources.white,18),
+            backgroundColor: Colors.deepOrange,
+            title:  mediumText('بيئتي',ColorResources.white,18),
           ),
           body: Form(
             key: formKey,
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             print('dd');
-                            return 'error';
+                            return 'الرجاء كتابة رقم الهاتف';
                           }
                           return null;
                         },
@@ -110,7 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: "رقم الهاتف ",
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -123,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText: _isObscure,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'err';
+                            return 'الرجاء كتابة كلمة المرور';
                           }
                           return null;
                         },
@@ -143,7 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           labelStyle:TextStyle( fontFamily: TextFontFamily.KHALED_FONT,),
                           labelText: 'كلمة المرور',
-                          border: const OutlineInputBorder(),
+                          border:  OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(15)
+
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -152,8 +157,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       Container(
                         height: 40.0,
                         width: double.infinity,
+                        
                         child: MaterialButton(
-                            color: ColorResources.custom,
+                            color: Colors.deepOrange,
+                            shape: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: Colors.transparent),
+
+                            ),
+                            elevation: 5,
+                            splashColor: ColorResources.custom,
                             onPressed: () async {
                               print(mobileController.text);
                               print(passwordController.text);
@@ -176,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else if (test == 'yes data') {
-                                   Get.off(BottomNavBar());
+                                   Get.off(BottomNavBar(), transition: Transition.fadeIn);
                                 }
 
                                 /*

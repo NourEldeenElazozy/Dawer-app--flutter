@@ -35,8 +35,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: ColorResources.custom,
-            title:  mediumText('عودة الحياة',ColorResources.white,18),
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.deepOrange,
+            title:  mediumText('بيئتي',ColorResources.white,18),
           ),
           body:Stack(
             children: [
@@ -67,17 +68,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       children: [
                         InkWell(
                           onTap: (){
-                            Get.to(LoginScreen());
+                            Get.to(LoginScreen(), transition: Transition.circularReveal);
                           },
                           child: Padding(padding: EdgeInsets.all(20),
-                            child:commonButton(null, ' تسجيل دخول', ColorResources.custom, ColorResources.whiteF6F) ,
+                            child:commonButton(null, ' تسجيل دخول', Colors.deepOrange, ColorResources.whiteF6F) ,
 
                           ),
                         ),
 
                         InkWell(
                           onTap: (){
-                            Get.to(RigesterScreen());
+                            Get.to(RigesterScreen(), transition: Transition.circularReveal);
                           },
                           child: Padding(padding: EdgeInsets.all(20),
                             child:commonButton2(null , 'انشاء حساب', ColorResources.white, ColorResources.custom) ,
@@ -88,7 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                      TextButton(
                          onPressed: (){
-                           Get.to(LoginCompanyScreen());
+                           Get.to(LoginCompanyScreen(), transition: Transition.downToUp);
                            },
                          child: mediumText('الدخول كشركة', ColorResources.blue0C1, 18)),
 
