@@ -1,6 +1,4 @@
 import 'package:dawerf/AuthScreens/WelcomeScreen.dart';
-import 'package:dawerf/Companys/Tasks.dart';
-import 'package:dawerf/Profile/Profile.dart';
 import 'package:dawerf/Profile/Profile2.dart';
 import 'package:dawerf/Utiils/User.dart';
 import 'package:dawerf/Utiils/colors.dart';
@@ -37,8 +35,8 @@ class _Profile2State extends State<Profile2> {
     getcom(phone, pass) async {
       await FirebaseFirestore.instance
           .collection('users')
-          .where("phone", isEqualTo: phone.toString())
-          .where("password", isEqualTo: pass.toString())
+          .where("name", isEqualTo: User.name)
+
           .get()
           .then((event) {
         if (event.docs.isNotEmpty) {
@@ -139,10 +137,8 @@ class _Profile2State extends State<Profile2> {
                                       StreamBuilder(
 
                                         stream: FirebaseFirestore.instance.collection('users')
-                                            .where("name", isEqualTo: User.name)
-                                            .snapshots(),
+                                            .where("name", isEqualTo: User.name).snapshots(),
                                         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-
 
                                           return   mediumText(
 
@@ -266,4 +262,118 @@ class _Profile2State extends State<Profile2> {
 
     ),
   );
+}
+class alertDialog extends StatefulWidget {
+  @override
+  State<alertDialog> createState() => _alertDialogState();
+}
+
+class _alertDialogState extends State<alertDialog> {
+
+
+  var passwordController = TextEditingController();
+
+  var passwordController2 = TextEditingController();
+
+  void  a;
+  ChangePass(pass)async{
+    await  FirebaseFirestore.instance.collection("users").doc(User.documentID)
+        .update({"password": pass}).then(
+          (value) {
+        User.password=pass;
+      },
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: AlertDialog(
+
+        scrollable: true,
+        title: mediumText('تغيير كلمة المرور',ColorResources.black,18),
+        content: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Form(
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'كلمة المرور الحالية',labelStyle: TextStyle(fontFamily: TextFontFamily.KHALED_FONT),
+                    icon: Icon(Icons.lock_clock),
+                  ),
+                ),
+                TextFormField(
+                  controller: passwordController2,
+                  decoration: InputDecoration(
+                    labelText: 'كلمة المرور الجديدة',labelStyle: TextStyle(fontFamily: TextFontFamily.KHALED_FONT),
+                    icon: Icon(Icons.lock_person),
+                  ),
+                ),
+                MaterialButton(
+
+                  color: ColorResources.custom,
+                  onPressed: (){
+                    if(passwordController.text!=User.password){
+                      final snackBar = SnackBar(
+                        content: mediumText(
+                            'اسم المستخدم او كلمة المرور غير صحيحة',
+                            ColorResources.whiteF6F,
+                            14),
+                        backgroundColor: (Colors.red),
+                        action: SnackBarAction(
+                          label: 'موافق',
+                          onPressed: () {},
+                        ),
+                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBar);
+
+                    }
+                    else if(passwordController2.text.length <4){
+                      final snackBar = SnackBar(
+                        content: mediumText(
+                            'يجب ان تكون كلمة المرور اكثر من 4 حقول',
+                            ColorResources.whiteF6F,
+                            14),
+                        backgroundColor: (Colors.red),
+                        action: SnackBarAction(
+                          label: 'موافق',
+                          onPressed: () {},
+                        ),
+                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBar);
+
+                    }
+                    else{
+                      ChangePass(passwordController2.text);
+                      final snackBar = SnackBar(
+                        content: mediumText(
+                            'تم تغيير كلمة المرور بنجاح',
+                            ColorResources.whiteF6F,
+                            14),
+                        backgroundColor: (Colors.green),
+                        action: SnackBarAction(
+                          label: 'موافق',
+                          onPressed: () {},
+                        ),
+                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBar);
+                      Get.back();
+                    }
+
+                  },
+                  child:mediumText('تأكيد',ColorResources.whiteF6F,18),
+                ),
+
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
