@@ -188,7 +188,6 @@ class _ProfileState extends State<Profile> {
                                         Get.to(WelcomeScreen());
                                       },
                                       child: Container(
-
                                         width: _width / 3,
                                         height: _height / 20,
                                         decoration: BoxDecoration(
@@ -374,6 +373,75 @@ class _alertDialogState extends State<alertDialog> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+class alertDialog2 extends StatefulWidget {
+  @override
+  State<alertDialog2> createState() => _alertDialogState2();
+}
+
+class _alertDialogState2 extends State<alertDialog2> {
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+
+         AlertDialog(
+
+
+              scrollable: true,
+              title: mediumText('تسجيل الخروج؟',ColorResources.black,18),
+              content: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  child: Row(
+
+                    children: <Widget>[
+
+                      Container(
+                        width: 130,
+                        height: 40,
+                        child: MaterialButton(
+
+                          color: ColorResources.custom,
+                          onPressed: () async {
+                            Get.to(WelcomeScreen());
+
+                          },
+                          child:mediumText('تسجيل خروج',ColorResources.whiteF6F,14),
+                        ),
+                      ),
+                      SizedBox(width: 5,),
+                      Container(
+                        width: 130,
+                        height: 40,
+                        child: MaterialButton(
+
+                          color: ColorResources.redF22,
+                          onPressed: (){
+                            Get.back();
+
+
+                        
+
+                          },
+                          child:mediumText('إلغاء',ColorResources.white,14),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+        ],
       ),
     );
   }
