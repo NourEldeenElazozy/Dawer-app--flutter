@@ -104,7 +104,7 @@ class _ContainersState extends State<Containers> {
                                                   children: [
                                                   Center(
                                                     child:   mediumText(documentSnapshot['address'],
-                                                        ColorResources.black4A4, 20),
+                                                        ColorResources.black4A4, 17),
                                                   )
                                                   ],
                                                 ),

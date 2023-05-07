@@ -41,12 +41,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
           body:Stack(
             children: [
-
-
-
               Container(
                 color: Colors.white,
-
                 child: Column(
 
                   children: [
@@ -55,11 +51,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         child:  const Image(
                           image: AssetImage('assets/images/logo.png'),
                           fit: BoxFit.cover,
-
                           height: 200.0,
                         ),
                       ),
-
                     ),
                     SizedBox(
                       height: 150,
@@ -81,24 +75,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Get.to(RigesterScreen(), transition: Transition.circularReveal);
                           },
                           child: Padding(padding: EdgeInsets.all(20),
-                            child:commonButton2(null , 'انشاء حساب', ColorResources.white, ColorResources.custom) ,
-
+                            child:commonButton2(null , 'انشاء حساب', ColorResources.white, ColorResources.custom),
                           ),
                         ),
-
-
                      TextButton(
                          onPressed: (){
                            Get.to(LoginCompanyScreen(), transition: Transition.downToUp);
                            },
                          child: mediumText('الدخول كشركة', ColorResources.blue0C1, 18)),
-
                       ],
                     ),
-
-
                   ],
-
                 ),
               ),
               Container(
@@ -128,11 +115,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ],
                 ),
              ),
-
-
             ],
           )
-
       ),
     );
   }

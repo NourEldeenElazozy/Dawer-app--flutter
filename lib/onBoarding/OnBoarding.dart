@@ -74,7 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           height: SizeConfig.blockV! * 35,
                         ),
                         SizedBox(
-                          height: (height >= 840) ? 60 : 30,
+                          height: (height >= 840) ? 40 : 25,
                         ),
                         Text(
                           contents[i].title,
@@ -82,10 +82,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           style: TextStyle(
                             fontFamily: "Mulish",
                             fontWeight: FontWeight.w600,
-                            fontSize: (width <= 550) ? 25 : 30,
+                            fontSize: (width <= 550) ? 25 : 15,
                           ),
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         Text(
                           contents[i].desc,
                           style: TextStyle(

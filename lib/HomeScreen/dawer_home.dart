@@ -144,7 +144,7 @@ class _DawerHomeState extends State<DawerHome> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    height: 110,
+                                    height: 120,
                                     width: 110,
                                     clipBehavior: Clip.hardEdge,
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
@@ -154,15 +154,15 @@ class _DawerHomeState extends State<DawerHome> {
                                   const SizedBox(width: 20,),
                                   Expanded(
                                     child: SizedBox(
-                                      height: 110,
+                                      height: 120,
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Expanded(child: Text(documentSnapshot['title'], overflow:TextOverflow.ellipsis,maxLines: 3,
-                                            style: Theme.of(context).textTheme.titleMedium,)
+                                          Expanded(child: Text(documentSnapshot['title'], overflow:TextOverflow.ellipsis,
+                                            style: TextStyle(fontSize: 16, height: 1.5, fontWeight: FontWeight.w600))
                                           ),
                                          Text(documentSnapshot['description'], overflow:TextOverflow.ellipsis,maxLines: 3,
-                                            style: Theme.of(context).textTheme.bodyText1),
+                                            style: TextStyle(fontSize: 12, color: Colors.grey, height: 1,)),
                                           
                                           Row(
                                             mainAxisSize: MainAxisSize.max,

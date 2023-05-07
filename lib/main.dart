@@ -25,8 +25,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'onBoarding/OnBoarding.dart';
 
 void main() async  {
-
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.dark,
   ));
