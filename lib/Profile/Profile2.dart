@@ -409,7 +409,7 @@ class _alertDialogState2 extends State<alertDialog2> {
                     children: <Widget>[
 
                       Container(
-                        width: 130,
+                        width: 120,
                         height: 40,
                         child: MaterialButton(
 
@@ -418,12 +418,12 @@ class _alertDialogState2 extends State<alertDialog2> {
                             Get.to(WelcomeScreen());
 
                           },
-                          child:mediumText('تسجيل خروج',ColorResources.whiteF6F,14),
+                          child:mediumText('تسجيل خروج',ColorResources.whiteF6F,10),
                         ),
                       ),
                       SizedBox(width: 5,),
                       Container(
-                        width: 130,
+                        width: 120,
                         height: 40,
                         child: MaterialButton(
 
@@ -435,7 +435,7 @@ class _alertDialogState2 extends State<alertDialog2> {
                         
 
                           },
-                          child:mediumText('إلغاء',ColorResources.white,14),
+                          child:mediumText('إلغاء',ColorResources.white,10),
                         ),
                       ),
 

@@ -292,8 +292,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                     text:'تم إضافة النموذج بنجاح',
                                     confirmBtnText: 'موافق',
                                     onConfirmBtnTap: () {
-                                    Get.to(DawerHome());
-
+                                   Get.off(BottomNavBar(), transition: Transition.fadeIn);
                                     },
                                     context: context,
                                     type: QuickAlertType.success,

@@ -11,7 +11,6 @@ import 'package:dawerf/AuthScreens/Login.dart';
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/text_font_family.dart';
 import 'package:dawerf/menu.dart';
-import 'package:dawerf/onBoarding/_OnBoardingPageState.dart';
 import 'package:dawerf/report.dart';
 import 'firebase_options.dart';
 
@@ -21,7 +20,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-
 import 'onBoarding/OnBoarding.dart';
 
 void main() async  {

@@ -87,7 +87,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                             print('dd');
                             return 'يجب ان يكون اسم المستخدم اكبر من 3 حروف';
                           }
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty) { 
                             print('dd');
                             return 'يجب كتابة اسم المستخدم';
                           }
@@ -107,6 +107,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                       const SizedBox(
                         height: 10.0,
                       ),
+
                       TextFormField(
                         enabled: true,
                         keyboardType: TextInputType.name,
@@ -138,6 +139,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                       const SizedBox(
                         height: 10.0,
                       ),
+
                       TextFormField(
                         enabled: true,
                         keyboardType: TextInputType.phone,
@@ -165,6 +167,7 @@ class _RigesterScreenState extends State<RigesterScreen> {
                       const SizedBox(
                         height: 10.0,
                       ),
+                      
                       TextFormField(
                         enabled: true,
                         controller: passwordController,

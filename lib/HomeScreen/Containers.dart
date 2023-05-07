@@ -61,7 +61,7 @@ class _ContainersState extends State<Containers> {
               ),
               Container(
                 width: double.infinity,
-                height: 500,
+                height: MediaQuery.of(context).size.height - 100,
                 child: StreamBuilder(
                   stream: containers.snapshots(), //build connection
                   builder:
