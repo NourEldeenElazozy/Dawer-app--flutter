@@ -292,56 +292,75 @@ class _ReportScreenState extends State<ReportScreen> {
                           width: 200,
                           height: 35,
                           child:  commonButton(() {
+
                             if(_index>0){
                               print('_index');
                               print(_index);
                               {
-                                getUserCurrentLocation().then((value) async {
-                                  print(value.latitude.toString() +" "+value.longitude.toString());
-                                  mylocations=value.latitude.toString() +" "+value.longitude.toString();
-                                  print(mylocations);
+                                if(selectedLocation.isEmpty || imageurl==null ||TitleController.text.isEmpty){
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('خطاء يرجي إدخال كامل البيانات'),
+                                      backgroundColor: Colors.red,
+                                      duration: Duration(seconds: 3),
+                                      action: SnackBarAction(
+                                        label: 'موافق',
+                                        onPressed: () {
+                                          // يمكن تنفيذ إجراء عند الضغط على الزر
+                                        },
+                                      ),
 
-                                  // marker added for current users location
-                                  _markers.add(
-                                      Marker(
-                                        markerId: MarkerId("2"),
-                                        position: LatLng(value.latitude, value.longitude),
-                                        infoWindow: InfoWindow(
-                                          title: 'My Current Location',
-                                        ),
-                                      )
+                                    ),
                                   );
+                                }else{
+                                  getUserCurrentLocation().then((value) async {
+                                    print(value.latitude.toString() +" "+value.longitude.toString());
+                                    mylocations=value.latitude.toString() +" "+value.longitude.toString();
+                                    print(mylocations);
 
-                                  // specified current users location
-                                  CameraPosition cameraPosition = new CameraPosition(
-                                    target: LatLng(value.latitude, value.longitude),
-                                    zoom: 14,
-                                  );
+                                    // marker added for current users location
+                                    _markers.add(
+                                        Marker(
+                                          markerId: MarkerId("2"),
+                                          position: LatLng(value.latitude, value.longitude),
+                                          infoWindow: InfoWindow(
+                                            title: 'My Current Location',
+                                          ),
+                                        )
+                                    );
 
-                                  final GoogleMapController controller = await _controller.future;
-                                  controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-                                  addReporting(selectedLocation.substring(1,selectedLocation.length-1), NoteController.text, 1, null, mylocations,imageurl,dateSlug).then((value) {
-                                    Addnotifications(dateSlug,NoteController.text);
-                                    Updatenum();
-                                    updateAreaByName(selectedLocation2);
+                                    // specified current users location
+                                    CameraPosition cameraPosition = new CameraPosition(
+                                      target: LatLng(value.latitude, value.longitude),
+                                      zoom: 14,
+                                    );
+
+                                    final GoogleMapController controller = await _controller.future;
+                                    controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+                                    addReporting(selectedLocation.substring(1,selectedLocation.length-1), NoteController.text, 1, null, mylocations,imageurl,dateSlug).then((value) {
+                                      Addnotifications(dateSlug,NoteController.text);
+                                      Updatenum();
+                                      updateAreaByName(selectedLocation2);
+                                    });
+                                    QuickAlert.show(
+                                      title: '',
+                                      text:'تم إضافة النموذج بنجاح',
+                                      confirmBtnText: 'موافق',
+                                      onConfirmBtnTap: () {
+                                        Get.back();
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => DawerHome()));
+
+                                      },
+                                      context: context,
+                                      type: QuickAlertType.success,
+
+                                    );
+                                    setState(() {
+
+                                    });
                                   });
-                                  QuickAlert.show(
-                                    title: '',
-                                    text:'تم إضافة النموذج بنجاح',
-                                    confirmBtnText: 'موافق',
-                                    onConfirmBtnTap: () {
-                                      Get.back();
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => DawerHome()));
+                                }
 
-                                    },
-                                    context: context,
-                                    type: QuickAlertType.success,
-                                    
-                                  );
-                                  setState(() {
-                                    
-                                  });
-                                });
                               }
                             }
 
