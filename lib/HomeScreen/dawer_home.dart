@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dawerf/NewsPage.dart';
-import 'package:dawerf/Profile/Profile.dart';
-
 import 'package:dawerf/Utiils/colors.dart';
 import 'package:dawerf/Utiils/common_widgets.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 class DawerHome extends StatefulWidget {
+
     final PageController pageViewController =  PageController();
      DawerHome({Key? key}) : super(key: key);
 
@@ -21,7 +20,7 @@ class DawerHome extends StatefulWidget {
 CollectionReference student = FirebaseFirestore.instance.collection('students');
 
 class _DawerHomeState extends State<DawerHome> {
-  
+
   CollectionReference student = FirebaseFirestore.instance.collection('users');
   final firestoreInstance = FirebaseFirestore.instance;
   // Initial Selected Value
@@ -45,6 +44,8 @@ class _DawerHomeState extends State<DawerHome> {
 
   @override
   Widget build(BuildContext context) {
+    PersistentTabController controller;
+    controller = PersistentTabController(initialIndex: 0);
       return Scaffold(
        body: SingleChildScrollView(
          child: Column(

@@ -51,6 +51,26 @@ class _ReportScreenState extends State<ReportScreen> {
     ),
   ];
 
+  Future<void> updateAreaByName(String name) async {
+    // الحصول على مرجع لمجموعة الوثائق في Firestore
+    CollectionReference areasRef = FirebaseFirestore.instance.collection('areas');
+
+    // الحصول على الوثيقة التي يتم تحديثها بناءً على الاسم
+    QuerySnapshot snapshot = await areasRef.where('title', isEqualTo: name).get();
+    if (snapshot.size == 1) {
+      print('snapshotsize ${snapshot.size}');
+      // إذا تم العثور على وثيقة واحدة فقط، تحديث حقل محدد بالقيمة الجديدة
+      String documentId = snapshot.docs.first.id;
+      print('documentId2 ${documentId}');
+      await areasRef.doc(documentId).update({
+    'numReborts': FieldValue.increment(1),
+    }).then((result){
+    print("new numReborts  true");
+    }).catchError((onError){
+    print("onError numReborts");
+    });
+    }
+  }
   Updatenum(){
   print(User.documentID);
   FirebaseFirestore.instance
@@ -249,7 +269,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: 350,
                         child: Text(
                             "بلغ عن المشكلة الأن وسيتم فريق محترف بالإهتمام بها",
@@ -268,7 +288,7 @@ class _ReportScreenState extends State<ReportScreen> {
                     children: [
 
                       SingleChildScrollView(
-                        child: Container(
+                        child: SizedBox(
                           width: 200,
                           height: 35,
                           child:  commonButton(() {
@@ -303,13 +323,16 @@ class _ReportScreenState extends State<ReportScreen> {
                                   addReporting(selectedLocation.substring(1,selectedLocation.length-1), NoteController.text, 1, null, mylocations,imageurl,dateSlug).then((value) {
                                     Addnotifications(dateSlug,NoteController.text);
                                     Updatenum();
+                                    updateAreaByName(selectedLocation2);
                                   });
                                   QuickAlert.show(
                                     title: '',
                                     text:'تم إضافة النموذج بنجاح',
                                     confirmBtnText: 'موافق',
                                     onConfirmBtnTap: () {
-                                   Get.to(DawerHome());
+                                      Get.back();
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => DawerHome()));
+
                                     },
                                     context: context,
                                     type: QuickAlertType.success,
@@ -540,7 +563,6 @@ class _ReportScreenState extends State<ReportScreen> {
                             ),
                           ),
                           Container(
-
                             child:  Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -557,17 +579,9 @@ class _ReportScreenState extends State<ReportScreen> {
                                   }).toList(),
 
                                   onChanged: (newVal) {
-
                                     selectedLocation2=newVal!;
 
-
-
-
-                                    this.setState(() {
-
-
-
-                                    });
+                                    setState(() {});
                                   },
                                 ),
 
@@ -576,7 +590,7 @@ class _ReportScreenState extends State<ReportScreen> {
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: 500,
                             height: 200,
                             child: SafeArea(
