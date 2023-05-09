@@ -50,6 +50,20 @@ class _ReportScreenState extends State<ReportScreen> {
         )
     ),
   ];
+
+  Updatenum(){
+  print(User.documentID);
+  FirebaseFirestore.instance
+      .collection('users')
+      .doc(User.documentID)
+      .update({
+    'numOfOrders': FieldValue.increment(1),
+  }).then((result){
+    print("new companies  true");
+  }).catchError((onError){
+    print("onError companies");
+  });
+}
   Future<Position> getUserCurrentLocation() async {
     
     await Geolocator.requestPermission().then((value){
@@ -107,6 +121,8 @@ class _ReportScreenState extends State<ReportScreen> {
         .then((value) => print("Report Added $value"))
         .catchError((error) => print("Failed to add user: $error"));
   }
+  
+ 
   String selectedLocation = '';
   String selectedLocation2 = '';
   List<String> _listDrugs= [];
@@ -285,14 +301,15 @@ class _ReportScreenState extends State<ReportScreen> {
                                   final GoogleMapController controller = await _controller.future;
                                   controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
                                   addReporting(selectedLocation.substring(1,selectedLocation.length-1), NoteController.text, 1, null, mylocations,imageurl,dateSlug).then((value) {
-                                    Addnotifications(dateSlug,NoteController.text) ;
+                                    Addnotifications(dateSlug,NoteController.text);
+                                    Updatenum();
                                   });
                                   QuickAlert.show(
                                     title: '',
                                     text:'تم إضافة النموذج بنجاح',
                                     confirmBtnText: 'موافق',
                                     onConfirmBtnTap: () {
-                                   Get.off(BottomNavBar(), transition: Transition.fadeIn);
+                                   Get.to(DawerHome());
                                     },
                                     context: context,
                                     type: QuickAlertType.success,

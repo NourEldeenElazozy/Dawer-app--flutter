@@ -49,19 +49,7 @@ getcom(phone, pass) async {
 
   }).catchError((e) => print("error fetching data: $e"));
 }
-Updatenum(){
-  print(User.documentID);
-  FirebaseFirestore.instance
-      .collection('companies')
-      .doc(User.documentID)
-      .update({
-    'numOfOrders': FieldValue.increment(1),
-  }).then((result){
-    print("new companies  true");
-  }).catchError((onError){
-    print("onError companies");
-  });
-}
+
 UpdateCancelCompany(){
   print(ReportDet.documentID);
   FirebaseFirestore.instance
@@ -188,7 +176,7 @@ class _ReportDetailsState extends State<ReportDetails> {
                        SnackBar snackBar;
                        await UpdateCompany().then(
                           await getcom(User.phone, User.password),
-                       await Updatenum(),
+                    
                         snackBar = SnackBar(
                        content: mediumText(
                        'تم قبول العملية بنجاح',
